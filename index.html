@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cântico</title>
+  <title>Cântico — Liturgia Diária</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Literata:opsz,wght@18..144,400;18..144,500;18..144,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
@@ -91,11 +91,30 @@
       transition: background .2s, color .2s, border-color .2s;
       border: 1px solid transparent;
       font-weight: 500;
+      min-height: 40px;
     }
     nav.top-nav button:hover {
       background: var(--brand-soft);
       color: var(--ink);
       border-color: var(--brand-soft);
+    }
+    nav.top-nav button:focus-visible,
+    .top-actions button:focus-visible,
+    .cta:focus-visible,
+    .chip:focus-visible,
+    .moments-sidebar button:focus-visible,
+    .entry-card:focus-visible,
+    .song-row:focus-visible,
+    .playlist-card:focus-visible,
+    .fav-item:focus-visible,
+    .profile-pick:focus-visible,
+    .menu-toggle:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    a:focus-visible {
+      outline: 3px solid var(--azul);
+      outline-offset: 2px;
     }
     nav.top-nav button.active {
       background: var(--brand);
@@ -124,6 +143,7 @@
       text-transform: uppercase;
       border-radius: 30px;
       transition: background .2s, border-color .2s;
+      min-height: 40px;
     }
     .top-actions button:hover { background: var(--brand-soft); border-color: var(--brand); }
     .top-actions button.primary {
@@ -169,8 +189,27 @@
       border-radius: 30px;
       color: var(--ink-soft);
       flex-shrink: 0;
+      min-height: 40px;
     }
     .menu-toggle:hover { background: var(--brand-soft); border-color: var(--brand); }
+
+    /* ===== SKIP LINK ===== */
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      background: var(--ink);
+      color: #fff;
+      padding: 12px 20px;
+      z-index: 999;
+      border-radius: 0 0 8px 0;
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      text-decoration: none;
+    }
+    .skip-link:focus {
+      left: 0;
+    }
 
     @media (max-width: 860px) {
       .menu-toggle { display: block; }
@@ -190,7 +229,7 @@
       nav.top-nav button {
         width: 100%;
         text-align: left;
-        padding: 10px 16px;
+        padding: 12px 16px;
         border-radius: 8px;
         border: none;
         font-size: 13px;
@@ -209,14 +248,19 @@
         gap: 10px;
       }
       .logo .tag { display: none; }
-      .top-actions button { font-size: 10px; padding: 6px 12px; }
+      .top-actions button { font-size: 10px; padding: 8px 12px; }
+    }
+
+    /* ===== TABLET (2 colunas) ===== */
+    @media (min-width: 761px) and (max-width: 1024px) {
+      .entry-grid, .playlist-grid, .fav-grid { grid-template-columns: repeat(2, 1fr) !important; }
     }
 
     @media (max-width: 480px) {
       header.top { padding: 10px 14px; }
       .logo .mark { font-size: 22px; }
-      .top-actions button { font-size: 9px; padding: 4px 10px; }
-      .top-actions button.primary { padding: 4px 12px; }
+      .top-actions button { font-size: 9px; padding: 8px 10px; }
+      .top-actions button.primary { padding: 8px 12px; }
       .user-chip { font-size: 10px; padding: 2px 8px 2px 2px; }
       .user-chip .av { width: 26px; height: 26px; font-size: 11px; }
     }
@@ -225,6 +269,13 @@
     main { max-width: 1140px; margin: 0 auto; padding: 30px 32px 80px; }
     .view { display: none; }
     .view.active { display: block; }
+
+    /* ===== TIPOGRAFIA / HIERARQUIA ===== */
+    h1 { font-size: clamp(24px, 4vw, 32px); }
+    h2 { font-size: clamp(20px, 3vw, 24px); }
+    h3 { font-size: clamp(16px, 2.4vw, 19px); }
+    .section-title h2 { font-size: clamp(19px, 3vw, 22px); }
+    .song-header h1 { font-size: clamp(24px, 4vw, 32px); }
 
     /* ===== BOTÕES E CARDS ===== */
     .cta {
@@ -242,6 +293,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      min-height: 44px;
     }
     .cta:hover { filter: brightness(0.92); }
     .cta.ghost {
@@ -252,7 +304,7 @@
     .cta.ghost:hover { background: var(--brand-soft); border-color: var(--brand); }
 
     .search-box { position: relative; max-width: 520px; margin: 0 0 24px; }
-    .search-box input { width: 100%; padding: 12px 18px; border: 1px solid var(--line); background: var(--paper-raised); font-size: 15px; border-radius: 40px; font-family: 'Literata', serif; }
+    .search-box input { width: 100%; padding: 12px 18px; border: 1px solid var(--line); background: var(--paper-raised); font-size: 15px; border-radius: 40px; font-family: 'Literata', serif; min-height: 44px; }
     .search-suggestions {
       position: absolute; top: 110%; left: 0; right: 0;
       background: var(--paper-raised); border: 1px solid var(--line);
@@ -261,14 +313,14 @@
     }
     .search-suggestions.show { display: block; }
     .search-suggestions .item { padding: 10px 18px; border-bottom: 1px solid var(--line); cursor: pointer; display: flex; justify-content: space-between; gap: 10px; font-size: 14px; align-items: center; }
-    .search-suggestions .item:hover { background: var(--brand-soft); }
+    .search-suggestions .item:hover, .search-suggestions .item:focus-visible { background: var(--brand-soft); outline: none; }
     .search-suggestions .item .sub { color: var(--ink-soft); font-size: 12px; white-space: nowrap; }
 
     .entry-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin: 28px 0; }
     .entry-card { background: var(--paper-raised); border: 1px solid var(--line); padding: 24px 20px; cursor: pointer; transition: transform .18s, border-color .18s; border-radius: 12px; }
     .entry-card:hover { transform: translateY(-3px); border-color: var(--brand); }
     .entry-card .eyebrow { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--gold); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; display: block; }
-    .entry-card h3 { margin: 0 0 8px; font-size: 19px; }
+    .entry-card h3 { margin: 0 0 8px; }
     .entry-card p { margin: 0; color: var(--ink-soft); font-size: 14.5px; }
 
     .stats-row { display: flex; gap: 28px; flex-wrap: wrap; margin: 10px 0 20px; }
@@ -283,19 +335,67 @@
     }
     .today-card .left { flex: 1; min-width: 200px; }
     .today-card .left .small { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--gold); text-transform: uppercase; letter-spacing: .08em; }
-    .today-card .left h2 { margin: 4px 0 6px; font-size: 24px; }
+    .today-card .left h2 { margin: 4px 0 6px; }
     .today-card .left .ev { color: var(--ink-soft); font-size: 15px; }
 
+    /* ===== ABA POR MOMENTO ===== */
+    .moments-layout {
+      display: flex;
+      gap: 24px;
+      margin-top: 16px;
+    }
+    .moments-sidebar {
+      flex: 0 0 200px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .moments-sidebar button {
+      background: none;
+      border: 1px solid var(--line);
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: var(--ink-soft);
+      text-align: left;
+      transition: all .2s;
+      min-height: 44px;
+    }
+    .moments-sidebar button:hover {
+      background: var(--brand-soft);
+      border-color: var(--brand);
+      color: var(--ink);
+    }
+    .moments-sidebar button.active {
+      background: var(--brand);
+      color: #fff;
+      border-color: var(--brand);
+    }
+    .moments-content {
+      flex: 1;
+      min-width: 0;
+    }
+    .moments-content .count-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      color: var(--ink-soft);
+      margin-left: 12px;
+    }
+
     .chip-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 24px; }
-    .chip { padding: 8px 16px; border: 1px solid var(--line); background: var(--paper-raised); font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer; text-transform: uppercase; letter-spacing: .03em; border-radius: 30px; }
+    .chip { padding: 10px 16px; border: 1px solid var(--line); background: var(--paper-raised); font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer; text-transform: uppercase; letter-spacing: .03em; border-radius: 30px; min-height: 40px; }
     .chip:hover, .chip.active { border-color: var(--brand); background: var(--brand-soft); }
+    .chip.active { color: var(--ink); font-weight: 700; }
 
     .section-title { display: flex; align-items: baseline; gap: 14px; margin: 0 0 16px; flex-wrap: wrap; justify-content: space-between; }
-    .section-title h2 { font-size: 22px; margin: 0; }
+    .section-title h2 { margin: 0; }
     .section-title .count { color: var(--ink-soft); font-family: 'Space Mono', monospace; font-size: 13px; }
 
     .song-list { display: flex; flex-direction: column; gap: 2px; }
-    .song-row { display: flex; align-items: center; gap: 16px; padding: 14px 18px 14px 0; border-bottom: 1px solid var(--line); cursor: pointer; transition: background .1s; }
+    .song-row { display: flex; align-items: center; gap: 16px; padding: 14px 18px 14px 0; border-bottom: 1px solid var(--line); cursor: pointer; transition: background .1s; min-height: 44px; }
     .song-row:hover { background: rgba(184,144,46,0.05); }
     .m-bar { width: 5px; align-self: stretch; flex-shrink: 0; border-radius: 3px; }
     .song-main { flex: 1; min-width: 0; }
@@ -305,11 +405,11 @@
     .m-tag { font-family: 'Space Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: .04em; padding: 2px 10px; border-radius: 20px; }
     .song-stars { font-family: 'Space Mono', monospace; color: var(--gold); font-size: 13px; white-space: nowrap; }
 
-    .back-link { background: none; border: none; cursor: pointer; font-family: 'Space Mono', monospace; font-size: 12px; color: var(--ink-soft); margin-bottom: 20px; padding: 0; }
+    .back-link { background: none; border: none; cursor: pointer; font-family: 'Space Mono', monospace; font-size: 12px; color: var(--ink-soft); margin-bottom: 20px; padding: 10px 0; min-height: 40px; }
     .back-link:hover { color: var(--ink); }
 
     .song-header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid var(--line); padding-bottom: 20px; margin-bottom: 24px; gap: 24px; flex-wrap: wrap; }
-    .song-header h1 { font-size: 32px; margin: 0 0 6px; }
+    .song-header h1 { margin: 0 0 6px; }
     .song-header .composer { color: var(--ink-soft); font-size: 15px; }
 
     .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 24px; }
@@ -334,8 +434,11 @@
     .planner-form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 12px; }
     .field { display: flex; flex-direction: column; gap: 4px; }
     .field label { font-family: 'Space Mono', monospace; font-size: 11px; text-transform: uppercase; color: var(--ink-soft); }
-    .field select, .field input, .field textarea { padding: 10px 12px; border: 1px solid var(--line); background: var(--paper-raised); font-family: 'Literata', serif; font-size: 14px; border-radius: 8px; }
+    .field select, .field input, .field textarea { padding: 10px 12px; border: 1px solid var(--line); background: var(--paper-raised); font-family: 'Literata', serif; font-size: 14px; border-radius: 8px; min-height: 44px; }
     .field textarea { min-height: 60px; resize: vertical; }
+    .field .hint-error { color: var(--vermelho); font-size: 12px; display: none; }
+    .field.invalid select, .field.invalid input, .field.invalid textarea { border-color: var(--vermelho); }
+    .field.invalid .hint-error { display: block; }
     .planner-note { font-size: 13px; color: var(--ink-soft); margin: 12px 0 20px; }
     .reading-card { background: var(--paper-raised); border: 1px solid var(--line); padding: 18px 22px; border-radius: 12px; margin-bottom: 20px; }
     .reading-card .theme { font-family: 'Fraunces', serif; font-size: 18px; margin: 6px 0; }
@@ -367,29 +470,31 @@
     .moment-block .mh .song-select {
       flex: 1;
       min-width: 150px;
-      padding: 6px 10px;
+      padding: 8px 10px;
       border: 1px solid var(--line);
       border-radius: 6px;
       font-family: 'Literata', serif;
       font-size: 14px;
       background: var(--paper-raised);
+      min-height: 44px;
     }
     .moment-block .mh .song-select:focus { border-color: var(--brand); outline: none; }
     .moment-block .mh button {
       background: none;
       border: 1px solid var(--line);
-      padding: 6px 14px;
+      padding: 8px 14px;
       font-family: 'Space Mono', monospace;
       font-size: 11px;
       cursor: pointer;
       border-radius: 30px;
       white-space: nowrap;
+      min-height: 40px;
     }
     .moment-block .mh button:hover { border-color: var(--brand); background: var(--brand-soft); }
 
     .playlist-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
     .playlist-card { border: 1px solid var(--line); background: var(--paper-raised); padding: 20px; border-radius: 8px; }
-    .playlist-card h3 { margin: 4px 0 6px; font-size: 18px; }
+    .playlist-card h3 { margin: 4px 0 6px; }
     .playlist-card .n { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--ink-soft); }
 
     .profile-header { display: flex; align-items: center; gap: 30px; flex-wrap: wrap; margin-bottom: 30px; }
@@ -400,7 +505,7 @@
     .profile-stats .ps .lab { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--ink-soft); text-transform: uppercase; }
 
     .fav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .fav-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 8px; cursor: pointer; }
+    .fav-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 8px; cursor: pointer; min-height: 44px; }
     .fav-item:hover { background: var(--brand-soft); }
 
     .empty-state { text-align: center; padding: 50px 20px; color: var(--ink-soft); }
@@ -409,17 +514,17 @@
     .overlay { position: fixed; inset: 0; background: rgba(36,31,26,0.45); display: none; align-items: center; justify-content: center; z-index: 100; padding: 20px; }
     .overlay.show { display: flex; }
     .modal { background: var(--paper-raised); border-radius: 14px; padding: 28px; max-width: 440px; width: 100%; max-height: 85vh; overflow-y: auto; }
-    .modal h3 { margin: 0 0 6px; font-size: 20px; }
+    .modal h3 { margin: 0 0 6px; }
     .modal .sub { color: var(--ink-soft); font-size: 13px; margin-bottom: 20px; }
-    .modal-close { float: right; background: none; border: none; font-size: 18px; color: var(--ink-soft); cursor: pointer; }
+    .modal-close { float: right; background: none; border: none; font-size: 18px; color: var(--ink-soft); cursor: pointer; min-height: 40px; min-width: 40px; }
 
-    .profile-pick { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; cursor: pointer; margin-bottom: 10px; }
+    .profile-pick { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; cursor: pointer; margin-bottom: 10px; min-height: 44px; }
     .profile-pick:hover { border-color: var(--brand); background: var(--brand-soft); }
     .profile-pick .av { width: 44px; height: 44px; border-radius: 50%; background: var(--brand-soft); color: var(--gold); display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-weight: 600; flex-shrink: 0; }
     .profile-pick .info .n { font-weight: 600; }
     .profile-pick .info .r { font-size: 12.5px; color: var(--ink-soft); }
 
-    .toast { position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%); background: var(--ink); color: #fff; padding: 12px 22px; border-radius: 30px; font-family: 'Space Mono', monospace; font-size: 13px; z-index: 200; opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; }
+    .toast { position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%); background: var(--ink); color: #fff; padding: 12px 22px; border-radius: 30px; font-family: 'Space Mono', monospace; font-size: 13px; z-index: 200; opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; max-width: calc(100vw - 40px); text-align: center; }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(-6px); }
 
     .footer-note { margin-top: 50px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--ink-soft); font-size: 12px; font-family: 'Space Mono', monospace; }
@@ -435,7 +540,7 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 6px 14px;
+      padding: 8px 14px;
       border: 1px solid var(--line);
       font-family: 'Space Mono', monospace;
       font-size: 12px;
@@ -443,12 +548,18 @@
       border-radius: 30px;
       user-select: none;
       transition: all .2s;
+      min-height: 40px;
     }
     .check-pill:hover { background: var(--brand-soft); }
     .check-pill:has(input:checked) { border-color: var(--brand); background: var(--brand-soft); }
-    .check-pill input[type="checkbox"] { accent-color: var(--brand); margin-right: 2px; }
+    .check-pill:focus-within { outline: 3px solid var(--azul); outline-offset: 2px; }
+    .check-pill input[type="checkbox"] { accent-color: var(--brand); margin-right: 2px; width: 18px; height: 18px; }
     .form-actions { display: flex; align-items: center; gap: 16px; margin-top: 6px; flex-wrap: wrap; }
     .form-hint { font-size: 12px; color: var(--ink-soft); }
+    .visually-hidden {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
 
     @media (max-width: 760px) {
       main { padding: 20px 18px 60px; }
@@ -457,25 +568,52 @@
       .planner-form { grid-template-columns: 1fr; }
       .form-grid { grid-template-columns: 1fr; }
       .today-card { flex-direction: column; align-items: flex-start; gap: 14px; }
+      .today-card .cta { width: 100%; justify-content: center; }
       .moment-block .mh { flex-direction: column; align-items: stretch; }
       .moment-block .mh .song-select { width: 100%; }
+      .moments-layout { flex-direction: column; }
+      .moments-sidebar { flex: 1; flex-direction: row; flex-wrap: wrap; gap: 4px; }
+      .moments-sidebar button { flex: 1; min-width: 80px; text-align: center; padding: 10px 12px; font-size: 10px; }
+      .song-header { flex-direction: column; }
     }
     @media (max-width: 480px) {
+      .stats-row { gap: 18px; }
       .stats-row .stat { font-size: 12px; }
       .song-main .meta { font-size: 12px; }
+      .song-row { padding: 12px 12px 12px 0; gap: 12px; }
+      main { padding: 16px 14px 50px; }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition-duration: 0.001ms !important; animation-duration: 0.001ms !important; }
+    }
+
+    #song-chords pre {
+  font-family: 'Space Mono', monospace;
+  background: var(--paper);
+  padding: 16px 20px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  line-height: 1.8;
+  font-size: 13px;
+}
   </style>
 </head>
 <body>
 
+<a href="#main-content" class="skip-link">Pular para o conteúdo</a>
+
 <div class="season-band"></div>
 <header class="top">
-  <div class="logo"><span class="mark">Cântico</span><span class=""></span></div>
+  <div class="logo"><span class="mark">Cântico</span><span class="tag">liturgia diária</span></div>
 
-  <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">☰ Menu</button>
+  <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="topNav">☰ Menu</button>
 
-  <nav class="top-nav" id="topNav">
-    <button data-view="home" class="active">Início</button>
+  <nav class="top-nav" id="topNav" aria-label="Navegação principal">
+    <button data-view="home" class="active" aria-current="page">Início</button>
+    <button data-view="moments">Por Momento</button>
     <button data-view="liturgy">Liturgia</button>
     <button data-view="planner">Planejador</button>
     <button data-view="playlists">Playlists</button>
@@ -487,10 +625,11 @@
   <div class="top-actions" id="top-actions"></div>
 </header>
 
-<main>
+<main id="main-content">
 
   <!-- ===== HOME ===== -->
   <section class="view active" id="view-home">
+    <h1 class="visually-hidden">Cântico — início</h1>
     <div class="stats-row">
       <div class="stat"><strong id="stat-songs">—</strong> músicas</div>
       <div class="stat"><strong>342</strong> colaboradores</div>
@@ -507,23 +646,41 @@
       <button class="cta" onclick="goView('planner')">Planejar repertório →</button>
     </div>
 
-    <div class="search-box">
-      <input type="text" id="globalSearch" placeholder="Buscar música, número, momento..." oninput="handleSearch(this.value)" onfocus="document.getElementById('suggestions').classList.add('show')" onblur="setTimeout(()=>document.getElementById('suggestions').classList.remove('show'),200)" />
-      <div class="search-suggestions" id="suggestions"></div>
+    <div class="search-box" role="search">
+      <label for="globalSearch" class="visually-hidden">Buscar música, número ou momento</label>
+      <input type="text" id="globalSearch" placeholder="Buscar música, número, momento..." autocomplete="off" role="combobox" aria-expanded="false" aria-controls="suggestions" aria-autocomplete="list" oninput="handleSearch(this.value)" onfocus="document.getElementById('suggestions').classList.add('show')" onblur="setTimeout(()=>document.getElementById('suggestions').classList.remove('show'),200)" />
+      <div class="search-suggestions" id="suggestions" role="listbox"></div>
     </div>
 
     <div class="entry-grid">
-      <div class="entry-card" onclick="goView('planner')"><span class="eyebrow">Planeje</span><h3>Planejador</h3><p>Monte seu repertório manualmente, escolha cada música e salve como playlist</p></div>
-      <div class="entry-card" onclick="goView('addsong')"><span class="eyebrow">Contribua</span><h3>+ Nova Música</h3><p>Cadastre músicas com informações completas: momento, links, letra, tom...</p></div>
-      <div class="entry-card" onclick="goView('playlists')"><span class="eyebrow">Comunidade</span><h3>Playlists</h3><p>Repertórios prontos, incluindo os que você criar</p></div>
+      <div class="entry-card" role="button" tabindex="0" onclick="goView('moments')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();goView('moments');}"><span class="eyebrow">Catálogo</span><h3>Por Momento</h3><p>Veja todas as músicas organizadas por cada parte da missa</p></div>
+      <div class="entry-card" role="button" tabindex="0" onclick="goView('planner')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();goView('planner');}"><span class="eyebrow">Planeje</span><h3>Planejador</h3><p>Monte seu repertório manualmente, escolha cada música e salve como playlist</p></div>
+      <div class="entry-card" role="button" tabindex="0" onclick="goView('addsong')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();goView('addsong');}"><span class="eyebrow">Contribua</span><h3>+ Nova Música</h3><p>Cadastre músicas com informações completas: momento, links, letra, tom...</p></div>
+    </div>
+  </section>
+
+  <!-- ===== POR MOMENTO ===== -->
+  <section class="view" id="view-moments">
+    <h1 class="visually-hidden">Músicas por momento da missa</h1>
+    <div class="section-title"><h2>Músicas por Momento da Missa</h2></div>
+    <div class="moments-layout">
+      <div class="moments-sidebar" id="moments-sidebar" role="tablist" aria-label="Momentos da missa"></div>
+      <div class="moments-content">
+        <div style="display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:16px;">
+          <h2 id="moment-title" style="margin:0; font-size:22px;">Entrada</h2>
+          <span class="count-badge" id="moment-count">0 músicas</span>
+        </div>
+        <div class="song-list" id="moments-songs"></div>
+      </div>
     </div>
   </section>
 
   <!-- ===== LITURGIA DO DIA ===== -->
   <section class="view" id="view-liturgy">
     <button class="back-link" onclick="goView('home')">← voltar</button>
+    <h1 class="visually-hidden">Liturgia diária</h1>
     <div class="section-title"><h2>Liturgia Diária</h2><span class="count">semana de 13 a 19 de julho</span></div>
-    <div class="chip-row" id="liturgy-chips"></div>
+    <div class="chip-row" id="liturgy-chips" role="tablist" aria-label="Dias da semana"></div>
 
     <div id="liturgy-content">
       <div class="reading-card" id="liturgy-readings"></div>
@@ -544,34 +701,39 @@
     <div class="tag-list" id="song-tags"></div>
     <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
       <button class="cta" style="padding:8px 20px;font-size:12px;" onclick="showToast('Adicionado ao repertório!')">+ Adicionar ao repertório</button>
-      <button class="cta ghost" style="padding:8px 20px;font-size:12px;" id="song-fav-btn" onclick="toggleFavCurrent()">★ Favoritar</button>
+      <button class="cta ghost" style="padding:8px 20px;font-size:12px;" id="song-fav-btn" onclick="toggleFavCurrent()" aria-pressed="false">★ Favoritar</button>
     </div>
     <div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:16px;" id="song-badges"></div>
     <div class="two-col">
       <div>
-        <h3>Recursos</h3>
+        <h2>Recursos</h2>
         <div class="resource-links" id="song-resources"></div>
-        <h3>Comentários</h3>
+        <h2>Comentários</h2>
         <div id="song-comments"></div>
+        <div id="song-chords" style="margin-top:20px;border-top:1px solid var(--line);padding-top:16px;">
+  <h2>Cifra</h2>
+  <pre id="song-chords-content"></pre>
+</div>
       </div>
       <div>
-        <h3>Avaliações</h3>
-        <div class="rating-block"><div class="label">Liturgicamente adequada</div><div class="stars">★★★★★</div></div>
-        <div class="rating-block"><div class="label">Fácil de tocar</div><div class="stars">★★★★☆</div></div>
-        <div class="rating-block"><div class="label">Assembleia canta bem</div><div class="stars">👍 85%</div></div>
+        <h2>Avaliações</h2>
+        <div class="rating-block"><div class="label" id="rating-label-1">Liturgicamente adequada</div><div class="stars" role="img" aria-labelledby="rating-label-1" aria-label="5 de 5 estrelas">★★★★★</div></div>
+        <div class="rating-block"><div class="label" id="rating-label-2">Fácil de tocar</div><div class="stars" role="img" aria-labelledby="rating-label-2" aria-label="4 de 5 estrelas">★★★★☆</div></div>
+        <div class="rating-block"><div class="label" id="rating-label-3">Assembleia canta bem</div><div class="stars" role="img" aria-labelledby="rating-label-3" aria-label="85 por cento de aprovação">👍 85%</div></div>
       </div>
     </div>
   </section>
 
-  <!-- ===== PLANEJADOR (MANUAL) ===== -->
+  <!-- ===== PLANEJADOR ===== -->
   <section class="view" id="view-planner">
+    <h1 class="visually-hidden">Planejador de repertório</h1>
     <div class="section-title"><h2>Planejador de Repertório</h2></div>
     <p class="planner-note">Selecione manualmente cada música para cada momento da missa. Escolha o nome e a data para salvar sua playlist.</p>
 
     <div class="planner-form">
-      <div class="field"><label>Nome da playlist</label><input type="text" id="playlist-name" placeholder="Ex: Missa de Crisma" /></div>
-      <div class="field"><label>Data da celebração</label><input type="date" id="playlist-date" value="2026-07-19" /></div>
-      <div class="field"><label>Tipo de celebração</label>
+      <div class="field"><label for="playlist-name">Nome da playlist</label><input type="text" id="playlist-name" placeholder="Ex: Missa de Crisma" /></div>
+      <div class="field"><label for="playlist-date">Data da celebração</label><input type="date" id="playlist-date" value="2026-07-19" /></div>
+      <div class="field"><label for="playlist-type">Tipo de celebração</label>
         <select id="playlist-type">
           <option value="Dominical">Dominical</option>
           <option value="Casamento">Casamento</option>
@@ -581,7 +743,7 @@
           <option value="Outro">Outro</option>
         </select>
       </div>
-      <div class="field"><label>Observações</label>
+      <div class="field"><label for="playlist-obs">Observações</label>
         <textarea id="playlist-obs" placeholder="Detalhes sobre a celebração, tema, leituras..."></textarea>
       </div>
     </div>
@@ -593,62 +755,66 @@
       <button class="cta ghost" onclick="clearPlanner()">Limpar tudo</button>
     </div>
 
-    <div id="plan-save-feedback" class="planner-note" style="margin-top:12px;display:none;"></div>
+    <div id="plan-save-feedback" class="planner-note" role="status" style="margin-top:12px;display:none;"></div>
   </section>
 
   <!-- ===== PLAYLISTS ===== -->
   <section class="view" id="view-playlists">
+    <h1 class="visually-hidden">Playlists</h1>
     <div class="section-title"><h2>Playlists</h2><span class="count" id="playlist-count"></span></div>
     <div class="playlist-grid" id="playlist-grid"></div>
   </section>
 
   <!-- ===== PERFIL ===== -->
   <section class="view" id="view-profile">
+    <h1 class="visually-hidden">Meu perfil</h1>
     <div class="section-title"><h2>Meu Perfil</h2></div>
     <div id="profile-logged-out" class="empty-state" style="display:none;">
-      <div class="glyph">🔒</div>
+      <div class="glyph" aria-hidden="true">🔒</div>
       <p>Entre para ver seu perfil, suas músicas salvas e suas contribuições.</p>
       <button class="cta" onclick="openLogin()">Entrar</button>
     </div>
     <div id="profile-logged-in">
       <div class="profile-header">
-        <div class="profile-avatar" id="profile-avatar">—</div>
+        <div class="profile-avatar" id="profile-avatar" aria-hidden="true">—</div>
         <div>
-          <h3 style="margin:0;" id="profile-name">—</h3>
+          <h2 style="margin:0;" id="profile-name">—</h2>
           <div style="color:var(--ink-soft);" id="profile-role">—</div>
           <div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap;" id="profile-mini-badges"></div>
         </div>
       </div>
       <div class="profile-stats" style="margin-bottom:24px;" id="profile-stats"></div>
-      <h3>Minhas favoritas</h3>
+      <h2>Minhas favoritas</h2>
       <div class="fav-grid" id="profile-favs"></div>
     </div>
   </section>
 
   <!-- ===== FAVORITOS ===== -->
   <section class="view" id="view-favorites">
+    <h1 class="visually-hidden">Favoritos</h1>
     <div class="section-title"><h2>Favoritos</h2></div>
     <div class="song-list" id="favorites-list"></div>
   </section>
 
-  <!-- ===== CADASTRO DE MÚSICA ===== -->
+  <!-- ===== CADASTRO ===== -->
   <section class="view" id="view-addsong">
     <button class="back-link" onclick="goView('home')">← voltar</button>
+    <h1 class="visually-hidden">Cadastrar nova música</h1>
     <div class="section-title"><h2>Cadastrar nova música</h2></div>
     <p class="planner-note">Preencha os dados da música. Ela aparecerá no catálogo após revisão de um moderador.</p>
 
-    <form class="form-shell" id="addsong-form" onsubmit="submitSong(event)">
+    <form class="form-shell" id="addsong-form" onsubmit="submitSong(event)" novalidate>
       <fieldset>
         <legend>Dados básicos</legend>
         <div class="form-grid">
-          <div class="field"><label>Nome da música *</label><input type="text" id="f-title" required /></div>
-          <div class="field"><label>Compositor *</label><input type="text" id="f-composer" required /></div>
-          <div class="field"><label>Ministério / Banda</label><input type="text" id="f-ministry" /></div>
-          <div class="field"><label>Ano</label><input type="number" id="f-year" min="1900" max="2100" /></div>
-          <div class="field"><label>Tom original</label><input type="text" id="f-key" placeholder="Ex: Sol maior" /></div>
-          <div class="field"><label>BPM</label><input type="text" id="f-bpm" placeholder="Ex: 84" /></div>
-          <div class="field"><label>Ritmo</label><input type="text" id="f-rhythm" placeholder="Ex: Balada, Samba, Rock" /></div>
-          <div class="field"><label>Dificuldade</label>
+          <div class="field" id="field-title"><label for="f-title">Nome da música *</label><input type="text" id="f-title" required aria-describedby="err-title" /><span class="hint-error" id="err-title">Informe o nome da música.</span></div>
+          <div class="field"><label for="f-composer">Compositor *</label><input type="text" id="f-composer" required /></div>
+          <div class="field"><label for="f-ministry">Ministério / Banda</label><input type="text" id="f-ministry" /></div>
+          <div class="field"><label for="f-year">Ano</label><input type="number" id="f-year" min="1900" max="2100" /></div>
+          <div class="field"><label for="f-key">Tom original</label><input type="text" id="f-key" placeholder="Ex: Sol maior" /></div>
+          <div class="field"><label for="f-bpm">BPM</label><input type="text" id="f-bpm" placeholder="Ex: 84" inputmode="numeric" /></div>
+          <div class="field"><label for="f-rhythm">Ritmo</label><input type="text" id="f-rhythm" placeholder="Ex: Balada, Samba, Rock" /></div>
+          <div class="field"><label for="f-difficulty">Dificuldade</label>
             <select id="f-difficulty">
               <option value="Iniciante">Iniciante</option>
               <option value="Intermediário" selected>Intermediário</option>
@@ -661,25 +827,25 @@
       <fieldset>
         <legend>Momento da missa</legend>
         <div class="field full">
-          <label>Selecione em quais momentos esta música pode ser usada:</label>
-          <div class="check-grid" id="f-moments"></div>
+          <span id="f-moments-label">Selecione em quais momentos esta música pode ser usada:</span>
+          <div class="check-grid" id="f-moments" role="group" aria-labelledby="f-moments-label"></div>
         </div>
         <div class="field full" style="margin-top:12px;">
-          <label>Tempos litúrgicos</label>
-          <div class="check-grid" id="f-seasons"></div>
+          <span id="f-seasons-label">Tempos litúrgicos</span>
+          <div class="check-grid" id="f-seasons" role="group" aria-labelledby="f-seasons-label"></div>
         </div>
       </fieldset>
 
       <fieldset>
         <legend>Links e recursos</legend>
         <div class="form-grid">
-          <div class="field"><label>YouTube (vídeo)</label><input type="url" id="f-youtube" placeholder="https://youtube.com/..." /></div>
-          <div class="field"><label>Spotify</label><input type="url" id="f-spotify" placeholder="https://spotify.com/..." /></div>
-          <div class="field"><label>Cifra Club</label><input type="url" id="f-cifra" placeholder="https://cifraclub.com/..." /></div>
-          <div class="field"><label>Letra (texto)</label>
+          <div class="field"><label for="f-youtube">YouTube (vídeo)</label><input type="url" id="f-youtube" placeholder="https://youtube.com/..." /></div>
+          <div class="field"><label for="f-spotify">Spotify</label><input type="url" id="f-spotify" placeholder="https://spotify.com/..." /></div>
+          <div class="field"><label for="f-cifra">Cifra Club</label><input type="url" id="f-cifra" placeholder="https://cifraclub.com/..." /></div>
+          <div class="field"><label for="f-lyrics">Letra (texto)</label>
             <textarea id="f-lyrics" rows="4" placeholder="Digite a letra da música aqui..."></textarea>
           </div>
-          <div class="field full"><label>Observações / dicas litúrgicas</label>
+          <div class="field full"><label for="f-notes">Observações / dicas litúrgicas</label>
             <textarea id="f-notes" rows="3" placeholder="Em qual momento da missa funciona melhor, dicas de execução, referências bíblicas..."></textarea>
           </div>
         </div>
@@ -692,32 +858,32 @@
     </form>
   </section>
 
-  <div class="footer-note">Cântico — protótipo · @delabeneta1</div>
+  <div class="footer-note">Cântico — protótipo · dados fictícios</div>
 </main>
 
 <!-- Overlays -->
-<div class="overlay" id="overlay-login">
-  <div class="modal">
-    <button class="modal-close" onclick="closeOverlay('overlay-login')">✕</button>
-    <h3>Entrar</h3>
+<div class="overlay" id="overlay-login" onclick="if(event.target===this) closeOverlay('overlay-login')">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="login-title">
+    <button class="modal-close" onclick="closeOverlay('overlay-login')" aria-label="Fechar">✕</button>
+    <h3 id="login-title">Entrar</h3>
     <div class="sub">Escolha um perfil para simular o login (protótipo).</div>
     <div id="login-profile-list"></div>
     <button class="cta ghost" style="width:100%;justify-content:center;margin-top:6px;" onclick="closeOverlay('overlay-login'); openSignup();">Criar uma conta nova</button>
   </div>
 </div>
 
-<div class="overlay" id="overlay-signup">
-  <div class="modal">
-    <button class="modal-close" onclick="closeOverlay('overlay-signup')">✕</button>
-    <h3>Criar conta</h3>
+<div class="overlay" id="overlay-signup" onclick="if(event.target===this) closeOverlay('overlay-signup')">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="signup-title">
+    <button class="modal-close" onclick="closeOverlay('overlay-signup')" aria-label="Fechar">✕</button>
+    <h3 id="signup-title">Criar conta</h3>
     <div class="sub">Protótipo — os dados ficam apenas nesta sessão.</div>
-    <div class="field"><label>Nome</label><input type="text" id="signup-name" placeholder="Seu nome completo" /></div>
-    <div class="field"><label>Função</label><input type="text" id="signup-role" placeholder="Ex: Músico litúrgico" /></div>
+    <div class="field"><label for="signup-name">Nome</label><input type="text" id="signup-name" placeholder="Seu nome completo" /></div>
+    <div class="field"><label for="signup-role">Função</label><input type="text" id="signup-role" placeholder="Ex: Músico litúrgico" /></div>
     <button class="cta" style="width:100%;justify-content:center;margin-top:8px;" onclick="createAccount()">Criar e entrar</button>
   </div>
 </div>
 
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
   // ============================================================
@@ -732,6 +898,41 @@
   // ============================================================
   // PARSER DAS LISTAS REAIS DE HINÁRIO
   // ============================================================
+  const DEFAULT_CHORDS = `G           D/F#         Em   Em/D
+As sementes que me deste e que não eram pra guardar
+C           G/B          Am   D7
+Pus no chão da minha vida, quis fazer frutificar
+
+[Refrão]
+G           D/F#         Em   Em/D
+Dos meus dons que recebi, pelo Espírito de amor
+C           G/B          Am   D7   G
+Trago os frutos que colhi, e em teu altar venho pôr
+
+G           D/F#         Em   Em/D
+A semente da esperança, que em meu peito semeaste
+C           G/B          Am   D7
+Floresceu na confiança, que a todos nós doaste`;
+
+  const BASTA_QUERER_CHORDS = `A           E/G#         F#m  F#m/E
+Meu pensamento vive em você
+D           A/C#         Bm   E
+A luz do meu viver, Senhor
+A           E/G#         F#m  F#m/E
+Basta entrar e eu me abrir pra te amar
+D           A/C#         Bm   E
+Nem precisa perguntar, te amo
+
+[Refrão]
+A           E/G#         F#m  F#m/E
+Há um clima todo diferente
+D           A/C#         Bm   E
+Que aquece e mexe com o coração da gente
+A           E/G#         F#m  F#m/E
+É como um sonho, é como um sonho
+D           A/C#         Bm   E   A
+Eu me dou por inteiro, teu é o meu coração`;
+
   function parseSongBlock(raw, moment, prefix) {
     return raw.split('\n').map(l => l.trim()).filter(Boolean).map((line, i) => {
       let code = null;
@@ -752,7 +953,8 @@
         stars: 3 + (h % 3),
         favCount: 4 + (h % 60),
         resources: { spotify: h % 3 !== 0, youtube: h % 4 !== 0, cifra: h % 2 === 0 },
-        comments: []
+        comments: [],
+        chords: title === "Basta Querer" ? BASTA_QUERER_CHORDS : null
       };
     });
   }
@@ -924,7 +1126,7 @@ Verdades do Tempo`;
 A mesa santa que preparamos- 845
 A nossa oferta apresentamos no altar-1331
 As nossas mão se abrem
-As sementes que me deste- 1323
+As sementes que me deste- 1323 - Tom: G
 A ti meu Deus- 834
 Bendito e louvado seja
 De mãos estendidas- 293
@@ -1058,8 +1260,12 @@ Vou te oferecer a vida`;
   let savedPlaylists = [];
   let lastListView = 'home';
   let currentSongId = null;
+  let lastFocusedEl = null;
 
   function initials(name) { return name.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase(); }
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
 
   // ============================================================
   // NAVEGAÇÃO
@@ -1068,11 +1274,23 @@ Vou te oferecer a vida`;
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     const el = document.getElementById('view-'+id);
     if (el) el.classList.add('active');
-    document.querySelectorAll('.top-nav button').forEach(b => b.classList.toggle('active', b.dataset.view === id));
+    document.querySelectorAll('.top-nav button').forEach(b => {
+      const isActive = b.dataset.view === id;
+      b.classList.toggle('active', isActive);
+      if (isActive) b.setAttribute('aria-current', 'page');
+      else b.removeAttribute('aria-current');
+    });
     if (id === 'favorites') renderFavorites();
     if (id === 'profile') renderProfile();
     if (id === 'playlists') renderPlaylists();
     if (id === 'planner') initPlanner();
+    if (id === 'moments') renderMomentsView();
+    // Move focus to the new view's heading for screen reader / keyboard users
+    const heading = el ? el.querySelector('h1, h2') : null;
+    if (heading) {
+      if (!heading.hasAttribute('tabindex')) heading.setAttribute('tabindex', '-1');
+      heading.focus({ preventScroll: true });
+    }
     window.scrollTo({top:0, behavior:'smooth'});
     closeMobileMenu();
   }
@@ -1085,17 +1303,36 @@ Vou te oferecer a vida`;
     clearTimeout(window._toastTimer);
     window._toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
   }
-  function openOverlay(id) { document.getElementById(id).classList.add('show'); }
-  function closeOverlay(id) { document.getElementById(id).classList.remove('show'); }
+  function openOverlay(id) {
+    lastFocusedEl = document.activeElement;
+    const overlay = document.getElementById(id);
+    overlay.classList.add('show');
+    const focusable = overlay.querySelector('button, input, select, textarea, a[href]');
+    if (focusable) focusable.focus();
+    document.addEventListener('keydown', handleOverlayKeydown);
+  }
+  function closeOverlay(id) {
+    document.getElementById(id).classList.remove('show');
+    document.removeEventListener('keydown', handleOverlayKeydown);
+    if (lastFocusedEl) lastFocusedEl.focus();
+  }
+  function handleOverlayKeydown(e) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.overlay.show').forEach(o => closeOverlay(o.id));
+    }
+  }
 
   // ===== MENU MOBILE =====
   document.getElementById('menuToggle').addEventListener('click', function() {
-    document.getElementById('topNav').classList.toggle('open');
-    this.textContent = document.getElementById('topNav').classList.contains('open') ? '✕ Fechar' : '☰ Menu';
+    const nav = document.getElementById('topNav');
+    const isOpen = nav.classList.toggle('open');
+    this.textContent = isOpen ? '✕ Fechar' : '☰ Menu';
+    this.setAttribute('aria-expanded', String(isOpen));
   });
   function closeMobileMenu() {
     document.getElementById('topNav').classList.remove('open');
     document.getElementById('menuToggle').textContent = '☰ Menu';
+    document.getElementById('menuToggle').setAttribute('aria-expanded', 'false');
   }
 
   // ============================================================
@@ -1105,7 +1342,7 @@ Vou te oferecer a vida`;
     const el = document.getElementById('top-actions');
     if (currentUser) {
       el.innerHTML = `
-        <div class="user-chip"><div class="av">${initials(currentUser.name)}</div><span>${currentUser.name.split(' ')[0]}</span></div>
+        <div class="user-chip"><div class="av" aria-hidden="true">${initials(currentUser.name)}</div><span>${escapeHtml(currentUser.name.split(' ')[0])}</span></div>
         <button onclick="logout()">Sair</button>`;
     } else {
       el.innerHTML = `
@@ -1115,9 +1352,9 @@ Vou te oferecer a vida`;
   }
   function openLogin() {
     document.getElementById('login-profile-list').innerHTML = PROFILES.map(p => `
-      <div class="profile-pick" onclick="loginAs('${p.id}')">
-        <div class="av">${initials(p.name)}</div>
-        <div class="info"><div class="n">${p.name}</div><div class="r">${p.role}</div></div>
+      <div class="profile-pick" role="button" tabindex="0" onclick="loginAs('${p.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();loginAs('${p.id}');}">
+        <div class="av" aria-hidden="true">${initials(p.name)}</div>
+        <div class="info"><div class="n">${escapeHtml(p.name)}</div><div class="r">${escapeHtml(p.role)}</div></div>
       </div>`).join('');
     openOverlay('overlay-login');
   }
@@ -1159,7 +1396,9 @@ Vou te oferecer a vida`;
   function updateFavButton() {
     const btn = document.getElementById('song-fav-btn');
     if (!btn) return;
-    btn.textContent = isFav(currentSongId) ? "★ Favoritado" : "★ Favoritar";
+    const fav = isFav(currentSongId);
+    btn.textContent = fav ? "★ Favoritado" : "★ Favoritar";
+    btn.setAttribute('aria-pressed', String(fav));
   }
 
   // ============================================================
@@ -1170,14 +1409,44 @@ Vou te oferecer a vida`;
   function songRow(song, fromView) {
     const fav = isFav(song.id);
     const colorVar = "var(--" + MOMENT_COLOR[song.moment] + ")";
-    return `<div class="song-row" onclick="openSong('${song.id}', '${fromView}')">
-      <div class="m-bar" style="background:${colorVar};"></div>
+    const label = `${song.title}, ${song.moment}${song.code ? ', número ' + song.code : ''}${fav ? ', favoritada' : ''}`;
+    return `<div class="song-row" role="button" tabindex="0" aria-label="${escapeHtml(label)}" onclick="openSong('${song.id}', '${fromView}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openSong('${song.id}', '${fromView}');}">
+      <div class="m-bar" style="background:${colorVar};" aria-hidden="true"></div>
       <div class="song-main">
-        <div class="title">${song.title} ${fav ? '<span class="fav">★</span>' : ''}</div>
+        <div class="title">${escapeHtml(song.title)} ${fav ? '<span class="fav" aria-hidden="true">★</span>' : ''}</div>
         <div class="meta"><span class="m-tag" style="background:var(--${MOMENT_COLOR[song.moment]}-soft);color:${colorVar};">${song.moment}</span>${song.code ? ' · nº '+song.code : ''}</div>
       </div>
-      <div class="song-stars">${starString(song.stars)}</div>
+      <div class="song-stars" aria-hidden="true">${starString(song.stars)}</div>
     </div>`;
+  }
+
+  // ============================================================
+  // POR MOMENTO
+  // ============================================================
+  let currentMoment = 'Entrada';
+
+  function renderMomentsView() {
+    const sidebar = document.getElementById('moments-sidebar');
+    sidebar.innerHTML = MOMENTS.map(m => `
+      <button class="${m === currentMoment ? 'active' : ''}" role="tab" aria-selected="${m === currentMoment}" onclick="selectMoment('${m}')">
+        ${m}
+      </button>
+    `).join('');
+    renderMomentSongs(currentMoment);
+  }
+
+  function selectMoment(moment) {
+    currentMoment = moment;
+    renderMomentsView();
+  }
+
+  function renderMomentSongs(moment) {
+    const songs = SONGS_BY_MOMENT[moment] || [];
+    document.getElementById('moment-title').textContent = moment;
+    document.getElementById('moment-count').textContent = songs.length + ' músicas';
+    document.getElementById('moments-songs').innerHTML = songs.length
+      ? songs.map(s => songRow(s, 'moments')).join('')
+      : `<div class="empty-state"><div class="glyph" aria-hidden="true">🎵</div><p>Nenhuma música cadastrada para este momento.</p></div>`;
   }
 
   // ============================================================
@@ -1199,7 +1468,7 @@ Vou te oferecer a vida`;
   function renderLiturgyComments(dayKey) {
     const c = LITURGY_COMMENTS[dayKey] || [{who:"Comunidade",text:"Compartilhe sua experiência com esta liturgia.",up:0}];
     document.getElementById('liturgy-comments').innerHTML = c.map(c =>
-      `<div class="comment"><div class="who">${c.who}</div><div class="text">${c.text}</div><div class="up">👍 ${c.up}</div></div>`
+      `<div class="comment"><div class="who">${escapeHtml(c.who)}</div><div class="text">${escapeHtml(c.text)}</div><div class="up">👍 ${c.up}</div></div>`
     ).join('');
   }
   function renderLiturgyDay(dayKey) {
@@ -1214,12 +1483,16 @@ Vou te oferecer a vida`;
     `;
     renderLiturgySongs(songsForDay(idx));
     renderLiturgyComments(dayKey);
-    document.querySelectorAll('#liturgy-chips .chip').forEach(c => c.classList.toggle('active', c.dataset.day === dayKey));
+    document.querySelectorAll('#liturgy-chips .chip').forEach(c => {
+      const active = c.dataset.day === dayKey;
+      c.classList.toggle('active', active);
+      c.setAttribute('aria-selected', String(active));
+    });
   }
   function initLiturgyChips() {
     const chipRow = document.getElementById('liturgy-chips');
     chipRow.innerHTML = LITURGY_DATA.map(d =>
-      `<button class="chip" data-day="${d.key}" onclick="renderLiturgyDay('${d.key}')">${d.label}</button>`
+      `<button class="chip" role="tab" aria-selected="false" data-day="${d.key}" onclick="renderLiturgyDay('${d.key}')">${d.label}</button>`
     ).join('');
     renderLiturgyDay(LITURGY_DATA[0].key);
   }
@@ -1235,9 +1508,11 @@ Vou te oferecer a vida`;
   // ============================================================
   function handleSearch(query) {
     const sug = document.getElementById('suggestions');
+    const input = document.getElementById('globalSearch');
     const q = query.toLowerCase().trim();
-    if (!q) { sug.classList.remove('show'); return; }
+    if (!q) { sug.classList.remove('show'); input.setAttribute('aria-expanded', 'false'); return; }
     sug.classList.add('show');
+    input.setAttribute('aria-expanded', 'true');
     const results = SONGS.filter(s =>
       s.title.toLowerCase().includes(q) ||
       s.moment.toLowerCase().includes(q) ||
@@ -1248,8 +1523,8 @@ Vou te oferecer a vida`;
       return;
     }
     sug.innerHTML = results.map(s =>
-      `<div class="item" onclick="openSong('${s.id}','home'); document.getElementById('suggestions').classList.remove('show');">
-        <span>${s.title}</span>
+      `<div class="item" role="option" tabindex="0" onclick="openSong('${s.id}','home'); document.getElementById('suggestions').classList.remove('show');" onkeydown="if(event.key==='Enter'){openSong('${s.id}','home'); document.getElementById('suggestions').classList.remove('show');}">
+        <span>${escapeHtml(s.title)}</span>
         <span class="sub">${s.moment}${s.code ? ' · nº '+s.code : ''}</span>
       </div>`
     ).join('');
@@ -1274,15 +1549,16 @@ Vou te oferecer a vida`;
     document.getElementById('song-resources').innerHTML =
       `${r.spotify ? '<span>Spotify</span>' : ''} ${r.youtube ? '<span>YouTube</span>' : ''} ${r.cifra ? '<span>Cifra Club</span>' : ''} <span>PDF</span>`;
     document.getElementById('song-comments').innerHTML = s.comments.length ?
-      s.comments.map(c => `<div class="comment"><div class="who">${c.who}</div><div class="text">${c.text}</div><div class="up">👍 ${c.up}</div></div>`).join('') :
+      s.comments.map(c => `<div class="comment"><div class="who">${escapeHtml(c.who)}</div><div class="text">${escapeHtml(c.text)}</div><div class="up">👍 ${c.up}</div></div>`).join('') :
       `<p style="color:var(--ink-soft);">Seja o primeiro a comentar.</p>`;
+    document.getElementById('song-chords-content').textContent = s.chords || 'Nenhuma cifra disponível para esta música.';
     updateFavButton();
     goView('song');
   }
   function goBackFromSong() { goView(lastListView); }
 
   // ============================================================
-  // PLANEJADOR (MANUAL)
+  // PLANEJADOR
   // ============================================================
   let plannerSelections = {};
 
@@ -1293,19 +1569,19 @@ Vou te oferecer a vida`;
       const songs = SONGS_BY_MOMENT[m] || [];
       const current = plannerSelections[m] || '';
       const colorVar = "var(--" + MOMENT_COLOR[m] + ")";
+      const selectId = 'planner-select-' + m.replace(/[^a-zA-Z]/g, '');
       html += `<div class="moment-block">
         <div class="mh" style="border-left:4px solid ${colorVar};">
-          <div class="name">${m}</div>
-          <select class="song-select" data-moment="${m}" onchange="updatePlannerSelection('${m}', this.value)">
+          <label class="name" for="${selectId}">${m}</label>
+          <select class="song-select" id="${selectId}" data-moment="${m}" onchange="updatePlannerSelection('${m}', this.value)">
             <option value="">— selecione —</option>
-            ${songs.map(s => `<option value="${s.id}" ${s.id === current ? 'selected' : ''}>${s.title}${s.code ? ' (nº '+s.code+')' : ''}</option>`).join('')}
+            ${songs.map(s => `<option value="${s.id}" ${s.id === current ? 'selected' : ''}>${escapeHtml(s.title)}${s.code ? ' (nº '+s.code+')' : ''}</option>`).join('')}
           </select>
-          <button onclick="clearMoment('${m}')" title="Limpar">✕</button>
+          <button onclick="clearMoment('${m}')" aria-label="Limpar seleção de ${m}">✕</button>
         </div>
       </div>`;
     });
     container.innerHTML = html;
-    document.getElementById('planner-date').value = '2026-07-19';
   }
 
   function updatePlannerSelection(moment, songId) {
@@ -1361,7 +1637,7 @@ Vou te oferecer a vida`;
     savedPlaylists.push(playlist);
     renderPlaylists();
     document.getElementById('plan-save-feedback').style.display = 'block';
-    document.getElementById('plan-save-feedback').innerHTML = `✅ Playlist "${name}" salva com ${selected.length} músicas!`;
+    document.getElementById('plan-save-feedback').innerHTML = `✅ Playlist "${escapeHtml(name)}" salva com ${selected.length} músicas!`;
     showToast(`Playlist "${name}" salva!`);
   }
 
@@ -1382,9 +1658,9 @@ Vou te oferecer a vida`;
       likes: p.likes || 0,
       date: p.date || p.createdAt || ''
     }))];
-    document.getElementById('playlist-grid').innerHTML = all.map(p =>
-      `<div class="playlist-card"><h3>${p.name}</h3><div class="n">${p.n} músicas · ❤️ ${p.likes} · ${p.author}${p.date ? ' · '+p.date : ''}</div></div>`
-    ).join('');
+    document.getElementById('playlist-grid').innerHTML = all.length ? all.map(p =>
+      `<div class="playlist-card"><h3>${escapeHtml(p.name)}</h3><div class="n">${p.n} músicas · ❤️ ${p.likes} · ${escapeHtml(p.author)}${p.date ? ' · '+p.date : ''}</div></div>`
+    ).join('') : `<div class="empty-state"><div class="glyph" aria-hidden="true">🎶</div><p>Nenhuma playlist ainda. Crie uma no Planejador.</p></div>`;
     document.getElementById('playlist-count').textContent = all.length + " playlists";
     document.getElementById('stat-playlists').textContent = all.length;
   }
@@ -1395,7 +1671,7 @@ Vou te oferecer a vida`;
   function renderFavorites() {
     const list = favorites.map(findSong).filter(Boolean);
     document.getElementById('favorites-list').innerHTML = list.length ? list.map(s => songRow(s, 'favorites')).join('') :
-      `<div class="empty-state"><div class="glyph">☆</div><p>Nenhuma favorita ainda. Toque na estrela na ficha de uma música.</p></div>`;
+      `<div class="empty-state"><div class="glyph" aria-hidden="true">☆</div><p>Nenhuma favorita ainda. Toque na estrela na ficha de uma música.</p></div>`;
   }
 
   function renderProfile() {
@@ -1416,17 +1692,24 @@ Vou te oferecer a vida`;
       <div class="ps"><span class="num">${currentUser.comments}</span><span class="lab">comentários</span></div>`;
     const favSongs = currentUser.favorites.map(findSong).filter(Boolean);
     document.getElementById('profile-favs').innerHTML = favSongs.length ? favSongs.map(s =>
-      `<div class="fav-item" onclick="openSong('${s.id}','profile')">${s.title} <span style="color:var(--ink-soft);font-size:13px;margin-left:auto;">${s.moment}</span></div>`
+      `<div class="fav-item" role="button" tabindex="0" onclick="openSong('${s.id}','profile')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openSong('${s.id}','profile');}">${escapeHtml(s.title)} <span style="color:var(--ink-soft);font-size:13px;margin-left:auto;">${s.moment}</span></div>`
     ).join('') : `<p style="color:var(--ink-soft);">Nenhuma favorita salva neste perfil.</p>`;
   }
 
   // ============================================================
-  // CADASTRO DE MÚSICA
+  // CADASTRO
   // ============================================================
   function submitSong(e) {
     e.preventDefault();
+    const titleField = document.getElementById('field-title');
     const title = document.getElementById('f-title').value.trim();
-    if (!title) { showToast('Preencha o nome da música'); return; }
+    if (!title) {
+      titleField.classList.add('invalid');
+      document.getElementById('f-title').focus();
+      showToast('Preencha o nome da música');
+      return;
+    }
+    titleField.classList.remove('invalid');
     const composer = document.getElementById('f-composer').value.trim() || 'Desconhecido';
     const momentChecks = document.querySelectorAll('#f-moments input:checked');
     const seasonChecks = document.querySelectorAll('#f-seasons input:checked');
@@ -1454,7 +1737,6 @@ Vou te oferecer a vida`;
       difficulty: document.getElementById('f-difficulty').value
     };
 
-    // Adiciona ao catálogo (apenas para o protótipo)
     SONGS.push(newSong);
     if (!SONGS_BY_MOMENT[newSong.moment]) SONGS_BY_MOMENT[newSong.moment] = [];
     SONGS_BY_MOMENT[newSong.moment].push(newSong);
@@ -1463,7 +1745,6 @@ Vou te oferecer a vida`;
     showToast(`✅ "${title}" enviada para revisão!`);
     e.target.reset();
 
-    // feedback visual
     const btn = e.target.querySelector('button[type="submit"]');
     const orig = btn.textContent;
     btn.textContent = '✅ Enviado!';
@@ -1471,7 +1752,7 @@ Vou te oferecer a vida`;
   }
 
   // ============================================================
-  // INIT FORM CHECKS (Momentos e Tempos no cadastro)
+  // INIT FORM CHECKS
   // ============================================================
   (function initFormChecks() {
     const momentDiv = document.getElementById('f-moments');
@@ -1505,6 +1786,7 @@ Vou te oferecer a vida`;
   renderPlaylists();
   renderFavorites();
   initPlanner();
+  renderMomentsView();
 </script>
 </body>
 </html>
