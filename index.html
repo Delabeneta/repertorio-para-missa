@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cântico — Liturgia Diária</title>
+  <title>Cântico</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Literata:opsz,wght@18..144,400;18..144,500;18..144,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
@@ -607,7 +607,7 @@
 
 <div class="season-band"></div>
 <header class="top">
-  <div class="logo"><span class="mark">Cântico</span><span class="tag">liturgia diária</span></div>
+  <div class="logo"><span class="mark">Cântico</span><span class=""></span></div>
 
   <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="topNav">☰ Menu</button>
 
@@ -858,7 +858,7 @@
     </form>
   </section>
 
-  <div class="footer-note">Cântico — protótipo · dados fictícios</div>
+  <div class="footer-note">Cântico — protótipo · @delabeneta1</div>
 </main>
 
 <!-- Overlays -->
@@ -895,69 +895,45 @@
     "Comunhão": "roxo", "Pós-Comunhão": "vermelho", "Final": "terra"
   };
 
+
+
+
+
+
   // ============================================================
   // PARSER DAS LISTAS REAIS DE HINÁRIO
   // ============================================================
-  const DEFAULT_CHORDS = `G           D/F#         Em   Em/D
-As sementes que me deste e que não eram pra guardar
-C           G/B          Am   D7
-Pus no chão da minha vida, quis fazer frutificar
 
-[Refrão]
-G           D/F#         Em   Em/D
-Dos meus dons que recebi, pelo Espírito de amor
-C           G/B          Am   D7   G
-Trago os frutos que colhi, e em teu altar venho pôr
 
-G           D/F#         Em   Em/D
-A semente da esperança, que em meu peito semeaste
-C           G/B          Am   D7
-Floresceu na confiança, que a todos nós doaste`;
-
-  const BASTA_QUERER_CHORDS = `A           E/G#         F#m  F#m/E
-Meu pensamento vive em você
-D           A/C#         Bm   E
-A luz do meu viver, Senhor
-A           E/G#         F#m  F#m/E
-Basta entrar e eu me abrir pra te amar
-D           A/C#         Bm   E
-Nem precisa perguntar, te amo
-
-[Refrão]
-A           E/G#         F#m  F#m/E
-Há um clima todo diferente
-D           A/C#         Bm   E
-Que aquece e mexe com o coração da gente
-A           E/G#         F#m  F#m/E
-É como um sonho, é como um sonho
-D           A/C#         Bm   E   A
-Eu me dou por inteiro, teu é o meu coração`;
-
-  function parseSongBlock(raw, moment, prefix) {
-    return raw.split('\n').map(l => l.trim()).filter(Boolean).map((line, i) => {
-      let code = null;
-      const m = line.match(/[-\s]+(\d{2,4})\.?\s*$/);
-      let title = line;
-      if (m) {
-        code = m[1];
-        title = line.slice(0, m.index);
-      }
-      title = title.replace(/[-,]\s*$/,'').trim();
-      let h = 0;
-      for (let c = 0; c < title.length; c++) h = (h * 31 + title.charCodeAt(c)) % 997;
-      return {
-        id: prefix + i,
-        title,
-        code,
-        moment,
-        stars: 3 + (h % 3),
-        favCount: 4 + (h % 60),
-        resources: { spotify: h % 3 !== 0, youtube: h % 4 !== 0, cifra: h % 2 === 0 },
-        comments: [],
-        chords: title === "Basta Querer" ? BASTA_QUERER_CHORDS : null
-      };
-    });
-  }
+  function parseSongBlock(raw, moment, prefix, chordsMap = {}) {
+  return raw.split('\n').map(l => l.trim()).filter(Boolean).map((line, i) => {
+    let code = null;
+    const m = line.match(/[-\s]+(\d{2,4})\.?\s*$/);
+    let title = line;
+    if (m) {
+      code = m[1];
+      title = line.slice(0, m.index);
+    }
+    title = title.replace(/[-,]\s*$/,'').trim();
+    let h = 0;
+    for (let c = 0; c < title.length; c++) h = (h * 31 + title.charCodeAt(c)) % 997;
+    
+    // Busca a cifra no mapa usando o título como chave
+    const chords = chordsMap[title] || null;
+    
+    return {
+      id: prefix + i,
+      title,
+      code,
+      moment,
+      stars: 3 + (h % 3),
+      favCount: 4 + (h % 60),
+      resources: { spotify: h % 3 !== 0, youtube: h % 4 !== 0, cifra: h % 2 === 0 },
+      comments: [],
+      chords: chords
+    };
+  });
+}
 
   const COMUNHAO_RAW = `A barca -206
 A Força da Eucaristia
@@ -1126,7 +1102,7 @@ Verdades do Tempo`;
 A mesa santa que preparamos- 845
 A nossa oferta apresentamos no altar-1331
 As nossas mão se abrem
-As sementes que me deste- 1323 - Tom: G
+As sementes que me deste- 1323
 A ti meu Deus- 834
 Bendito e louvado seja
 De mãos estendidas- 293
@@ -1175,18 +1151,240 @@ Venho Senhor oferecer-1013
 Volta teu olhar Senhor
 Vou te oferecer a vida`;
 
-  const SONGS_OFERTORIO = parseSongBlock(OFERTORIO_RAW, "Ofertório", "ofe");
-  const SONGS_COMUNHAO = parseSongBlock(COMUNHAO_RAW, "Comunhão", "com");
-  const SONGS_POSCOMUNHAO = parseSongBlock(POSCOMUNHAO_RAW, "Pós-Comunhão", "pos");
+// CIFRAS: ENTRADA
 
-  function mockList(titles, moment, prefix) {
+const A_ESCOLHIDA_CHORDS = `Tom: G
+
+G           D/F#         Em
+Uma entre todas foi a escolhida
+C           Am           D7
+Foste tu Maria, serva preferida
+G           D/F#         Em
+Mãe do meu Senhor
+C           D7           G    G7
+Mãe do meu Salvador
+
+[Refrão]
+C       D/C   Bm        Em
+Maria, cheia de graça e consolo
+Am      D7       G   G7
+Venha caminhar com teu povo
+C       D/C   Bm        Em
+Nossa Mãe sempre serás
+Am      D7       G
+Nossa Mãe sempre serás
+
+G           D/F#         Em
+Roga pelos pecadores desta Terra
+C           Am           D7
+Roga pelo povo que em seu Deus espera
+G           D/F#         Em
+Mãe do meu Senhor
+C           D7           G    G7
+Mãe do meu Salvador`;
+
+// CIFRAS: PÓS COMUNHAO
+
+const BASTA_QUERER_CHORDS = `Tom: A
+
+A           E/G#         F#m  F#m/E
+Meu pensamento vive em você
+D           A/C#         Bm   E
+A luz do meu viver, Senhor
+A           E/G#         F#m  F#m/E
+Basta entrar e eu me abrir pra te amar
+D           A/C#         Bm   E
+Nem precisa perguntar, te amo
+
+[Refrão]
+A           E/G#         F#m  F#m/E
+Há um clima todo diferente
+D           A/C#         Bm   E
+Que aquece e mexe com o coração da gente
+A           E/G#         F#m  F#m/E
+É como um sonho, é como um sonho
+D           A/C#         Bm   E   A
+Eu me dou por inteiro, teu é o meu coração`;
+
+
+// ofertório:
+
+const AS_SEMENTES_CHORDS = `Tom: G
+
+G           D/F#         Em   Em/D
+As sementes que me deste e que não eram pra guardar
+C           G/B          Am   D7
+Pus no chão da minha vida, quis fazer frutificar
+
+[Refrão]
+G           D/F#         Em   Em/D
+Dos meus dons que recebi, pelo Espírito de amor
+C           G/B          Am   D7   G
+Trago os frutos que colhi, e em teu altar venho pôr
+
+G           D/F#         Em   Em/D
+A semente da esperança, que em meu peito semeaste
+C           G/B          Am   D7
+Floresceu na confiança, que a todos nós doaste`;
+
+
+const A_BARCA_CHORDS = `Tom: A
+
+A              E/G#        F#m   F#m/E
+Tu, te abeiraste da praia
+      D                 Bm             E
+Não buscaste nem sábios, nem ricos
+A               E/G#           F#m   A7
+Somente queres que eu te siga
+
+[Refrão]
+         D    E/D                C#m    F#m
+Senhor, Tu me olhaste nos olhos
+       Bm        E                 A     A7
+A sorrir, pronunciaste meu nome
+          D    E/D                C#m    F#m
+Lá na praia, eu larguei o meu barco
+          Bm      E               A
+Junto a Ti, buscarei outro mar`;
+
+const EU_SOU_O_PAO_CHORDS = `Tom: G
+
+G           Bm           C      D
+Eu sou o pão da vida
+G           Bm           C      D
+O que vem a mim não terá fome
+G           Bm           C      D
+O que crê em mim não terá sede
+G           Bm           C      D
+Ninguém vem a mim se meu Pai não o atrair
+
+[Refrão]
+G           D/F#         Em     C
+Eu o ressuscitarei
+G           D/F#         Em     C
+Eu o ressuscitarei
+G           D/F#         Em     C   D   G
+Eu o ressuscitarei no dia final`;
+
+const NINGUEM_TE_AMA_CHORDS = `Tom: C
+
+C             G/B           Am   Am/G
+Tenho esperado este momento
+F             Dm            G
+Tenho esperado que viesses a mim
+C             G/B           Am   Am/G
+Tenho esperado que me fales
+F             Dm            G
+Tenho esperado que estivesses assim
+
+[Refrão]
+C             G/B           Am   Am/G
+Pois ninguém te ama como eu
+F             Dm            G
+Pois ninguém te ama como eu
+C             G/B           Am   Am/G
+Olhe pra cruz, esta é a minha grande prova
+F             Dm            G
+Ninguém te ama como eu`;
+
+
+
+
+const ENTRADA_CHORDS_MAP = {
+  "A escolhida": A_ESCOLHIDA_CHORDS
+}
+
+const OFERTORIO_CHORDS_MAP = {
+  "As sementes que me deste": AS_SEMENTES_CHORDS
+
+};
+
+const POSCOMUNHAO_CHORDS_MAP = {
+  "Basta Querer": BASTA_QUERER_CHORDS,
+  "Ninguém te ama como eu": NINGUEM_TE_AMA_CHORDS
+};
+
+// Agora passe o mapa como terceiro argumento
+const SONGS_OFERTORIO = parseSongBlock(OFERTORIO_RAW, "Ofertório", "ofe", OFERTORIO_CHORDS_MAP);
+const SONGS_COMUNHAO = parseSongBlock(COMUNHAO_RAW, "Comunhão", "com");
+const SONGS_POSCOMUNHAO = parseSongBlock(POSCOMUNHAO_RAW, "Pós-Comunhão", "pos", POSCOMUNHAO_CHORDS_MAP);
+  
+function mockList(titles, moment, prefix) {
     return titles.map((title, i) => ({
       id: prefix + i, title, code: null, moment,
       stars: 4 + (i % 2), favCount: 10 + i * 3,
       resources: { spotify: true, youtube: true, cifra: i % 2 === 0 }, comments: []
     }));
   }
-  const SONGS_ENTRADA = mockList(["Vinde Espírito Santo","Envia Teu Espírito","Vem, Senhor, Reunir Teu Povo","Bendize, ó Minh'Alma","Cantai ao Senhor um Cântico Novo","Alegrai-vos no Senhor"], "Entrada", "ent");
+const SONGS_ENTRADA = [
+  { id: "ent0", title: "A escolhida", code: "509", moment: "Entrada", stars: 4, favCount: 12, resources: { spotify: true, youtube: true, cifra: true }, comments: [],  chords: A_ESCOLHIDA_CHORDS  },
+  { id: "ent1", title: "Alegrai-vos sempre no Senhor", code: "864", moment: "Entrada", stars: 4, favCount: 10, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent2", title: "Cantai a Deus com alegria", code: "652", moment: "Entrada", stars: 4, favCount: 9, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent3", title: "Celebrai", code: "1435", moment: "Entrada", stars: 4, favCount: 11, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent4", title: "Chuva de graça", code: null, moment: "Entrada", stars: 4, favCount: 8, resources: { spotify: true, youtube: true, cifra: false }, comments: [] },
+  { id: "ent5", title: "Conheço um Coração", code: "750", moment: "Entrada", stars: 4, favCount: 13, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent6", title: "Coração de Cristo, Coração de Homem", code: null, moment: "Entrada", stars: 4, favCount: 7, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent7", title: "Cristãos Vinde Todos", code: null, moment: "Entrada", stars: 4, favCount: 6, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent8", title: "Cristo Ressuscitou", code: null, moment: "Entrada", stars: 5, favCount: 20, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent9", title: "Deixa a luz do céu entrar", code: "289", moment: "Entrada", stars: 4, favCount: 10, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent10", title: "Derrama o teu amor aqui", code: null, moment: "Entrada", stars: 4, favCount: 9, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent11", title: "Desde o nascer ao por do sol", code: "501", moment: "Entrada", stars: 4, favCount: 11, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent12", title: "Desperta", code: "1010", moment: "Entrada", stars: 4, favCount: 8, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent13", title: "Deus chama a gente pra um momento novo", code: null, moment: "Entrada", stars: 4, favCount: 7, resources: { spotify: true, youtube: true, cifra: false }, comments: [] },
+  { id: "ent14", title: "Deus enviou", code: "461", moment: "Entrada", stars: 4, favCount: 9, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent15", title: "Deus é 10", code: null, moment: "Entrada", stars: 3, favCount: 6, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent16", title: "Deus nosso pai protetor", code: null, moment: "Entrada", stars: 4, favCount: 8, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent17", title: "Deus quero louvar-te", code: "995", moment: "Entrada", stars: 4, favCount: 10, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent18", title: "Eis me aqui Senhor", code: "1319", moment: "Entrada", stars: 4, favCount: 12, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent19", title: "Ela é uma semente", code: null, moment: "Entrada", stars: 4, favCount: 7, resources: { spotify: true, youtube: true, cifra: false }, comments: [] },
+  { id: "ent20", title: "Entremos com grande alegria", code: null, moment: "Entrada", stars: 4, favCount: 9, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent21", title: "Espírito de Deus", code: null, moment: "Entrada", stars: 4, favCount: 11, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent22", title: "Estaremos aqui reunidos", code: "207", moment: "Entrada", stars: 4, favCount: 10, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent23", title: "Eu creio em Deus", code: "223", moment: "Entrada", stars: 4, favCount: 9, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent24", title: "Eu quero ser de Deus", code: null, moment: "Entrada", stars: 4, favCount: 8, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent25", title: "Eu quero um rio", code: "505", moment: "Entrada", stars: 4, favCount: 7, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent26", title: "Fala assim meu coração", code: null, moment: "Entrada", stars: 4, favCount: 8, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent27", title: "Fico feliz", code: "1301", moment: "Entrada", stars: 4, favCount: 10, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent28", title: "Hoje é dia de celebração", code: null, moment: "Entrada", stars: 4, favCount: 9, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent29", title: "Hoje é tempo de louvar a Deus", code: "482", moment: "Entrada", stars: 4, favCount: 11, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent30", title: "Igreja Reunida", code: null, moment: "Entrada", stars: 4, favCount: 8, resources: { spotify: true, youtube: true, cifra: false }, comments: [] },
+  { id: "ent31", title: "Lugar de Adoração e vida", code: null, moment: "Entrada", stars: 4, favCount: 7, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent32", title: "Mestre onde moras", code: null, moment: "Entrada", stars: 4, favCount: 9, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent33", title: "Não existe amor sem entrega", code: null, moment: "Entrada", stars: 4, favCount: 8, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent34", title: "Nova Geração", code: null, moment: "Entrada", stars: 4, favCount: 10, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent35", title: "Novo sol brilhou", code: null, moment: "Entrada", stars: 4, favCount: 7, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent36", title: "Obra nova", code: "882", moment: "Entrada", stars: 4, favCount: 9, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent37", title: "O meu lugar é o céu", code: null, moment: "Entrada", stars: 4, favCount: 8, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent38", title: "O pai somos nós o povo eleito", code: null, moment: "Entrada", stars: 4, favCount: 6, resources: { spotify: true, youtube: true, cifra: false }, comments: [] },
+  { id: "ent39", title: "O Senhor é rei", code: null, moment: "Entrada", stars: 4, favCount: 10, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent40", title: "O Senhor está pra chegar", code: null, moment: "Entrada", stars: 4, favCount: 9, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent41", title: "O Senhor me chamou e eu respondi", code: null, moment: "Entrada", stars: 4, favCount: 11, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent42", title: "O Senhor necessitou de braços", code: "220", moment: "Entrada", stars: 4, favCount: 8, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent43", title: "O Senhor nós estamos aqui", code: "782", moment: "Entrada", stars: 4, favCount: 12, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent44", title: "O Senhor ressurgiu", code: "1341", moment: "Entrada", stars: 5, favCount: 18, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent45", title: "Por amor e vocação", code: null, moment: "Entrada", stars: 4, favCount: 7, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent46", title: "Porque ele vive", code: "461", moment: "Entrada", stars: 5, favCount: 22, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent47", title: "Por melhor que seja alguém", code: "279", moment: "Entrada", stars: 4, favCount: 9, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent48", title: "Por sua morte", code: null, moment: "Entrada", stars: 4, favCount: 6, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent49", title: "Quem é esta que avança", code: "724", moment: "Entrada", stars: 4, favCount: 8, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent50", title: "Rendemos Glória", code: null, moment: "Entrada", stars: 4, favCount: 10, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent51", title: "Reunidos aqui", code: "576", moment: "Entrada", stars: 4, favCount: 11, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent52", title: "Se tu nos amas", code: null, moment: "Entrada", stars: 4, favCount: 7, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent53", title: "Santíssima Trindade", code: null, moment: "Entrada", stars: 4, favCount: 9, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent54", title: "Senhor quem entrara", code: "129", moment: "Entrada", stars: 4, favCount: 8, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent55", title: "Só porque você veio", code: null, moment: "Entrada", stars: 4, favCount: 10, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent56", title: "Te amarei", code: "685", moment: "Entrada", stars: 4, favCount: 12, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent57", title: "Toda igreja unida celebra", code: null, moment: "Entrada", stars: 4, favCount: 9, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent58", title: "Todo Dia", code: null, moment: "Entrada", stars: 4, favCount: 8, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent59", title: "Tua voz me fez refletir", code: "1315", moment: "Entrada", stars: 4, favCount: 10, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent60", title: "Vamos celebrar Deus está aqui", code: null, moment: "Entrada", stars: 4, favCount: 11, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent61", title: "Vamos celebrar com júbilo", code: "648", moment: "Entrada", stars: 4, favCount: 10, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent62", title: "Vem amigo", code: null, moment: "Entrada", stars: 4, favCount: 7, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent63", title: "Vem, vem louvar", code: "814", moment: "Entrada", stars: 4, favCount: 9, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent64", title: "Vem eu mostrarei", code: "118", moment: "Entrada", stars: 4, favCount: 11, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent65", title: "Venham, venham todos para ceia do Senhor", code: null, moment: "Entrada", stars: 4, favCount: 8, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent66", title: "Vigia esperando aurora", code: "588", moment: "Entrada", stars: 4, favCount: 7, resources: { spotify: true, youtube: true, cifra: true }, comments: [] },
+  { id: "ent67", title: "Vocação de profeta", code: "1282", moment: "Entrada", stars: 4, favCount: 10, resources: { spotify: true, youtube: true, cifra: true }, comments: [] }];
   const SONGS_ACLAMACAO = mockList(["A Tua Palavra","Semeador","Aleluia, Palavra da Vida","Toda Criatura Aclame o Senhor","Fala, Senhor, Fala"], "Aclamação", "acl");
   const SONGS_FINAL = mockList(["Ide por Todo o Mundo","Maria, Mãe da Igreja","Vamos Celebrar em Missão","Ao Deus a Quem Adoro","Envia Teu Espírito"], "Final", "fin");
 
