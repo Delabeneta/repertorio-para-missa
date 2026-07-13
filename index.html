@@ -3,30 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cântico — Plataforma Litúrgica</title>
+  <title>Cântico</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Literata:opsz,wght@18..144,400;18..144,500;18..144,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    /* ===== BASE ===== */
-    :root {
-      --paper: #F7F3EC;
-      --paper-raised: #FFFFFF;
-      --ink: #241F1A;
-      --ink-soft: #6b6259;
-      --line: #e4dccc;
-      --gold: #B8902E;
-      --gold-soft: #EFE2C0;
-      --verde: #3F6B4A;
-      --roxo: #5B4B8A;
-      --branco: #C9A227;
-      --vermelho: #A13D3D;
-      --veste: var(--verde);
-      --veste-soft: #E4EDE3;
-    }
+    /* ===== RESET ===== */
     * { box-sizing: border-box; }
     body {
-      background: var(--paper);
-      color: var(--ink);
+      background: #F7F3EC;
+      color: #241F1A;
       font-family: 'Literata', serif;
       font-size: 16px;
       line-height: 1.5;
@@ -36,67 +21,252 @@
     }
     h1, h2, h3, .display { font-family: 'Fraunces', serif; font-weight: 600; letter-spacing: -0.01em; }
     .mono { font-family: 'Space Mono', monospace; letter-spacing: 0.02em; }
-    a { color: inherit; }
     button { font-family: inherit; cursor: pointer; }
 
-    /* ===== HEADER ===== */
-    .season-band { height: 6px; width: 100%; background: linear-gradient(90deg, var(--verde) 0 25%, var(--roxo) 25% 50%, var(--branco) 50% 75%, var(--vermelho) 75% 100%); }
-    header.top {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 32px; border-bottom: 1px solid var(--line);
-      background: var(--paper); flex-wrap: wrap; gap: 10px;
+    /* ===== VARIÁVEIS ===== */
+    :root {
+      --paper: #F7F3EC;
+      --paper-raised: #FFFFFF;
+      --ink: #241F1A;
+      --ink-soft: #6b6259;
+      --line: #e4dccc;
+      --brand: #B8902E;
+      --brand-soft: #EFE2C0;
+      --gold: #B8902E;
+      --azul: #3B6E91;
+      --azul-soft: #E3ECF1;
+      --verde: #3F6B4A;
+      --verde-soft: #E4EDE3;
+      --roxo: #5B4B8A;
+      --roxo-soft: #E9E5F2;
+      --vermelho: #A13D3D;
+      --vermelho-soft: #F3E1E1;
+      --terra: #A15C32;
+      --terra-soft: #F1E3D6;
     }
-    .logo .mark { font-family: 'Fraunces', serif; font-weight: 700; font-size: 26px; color: var(--veste); transition: color .4s; }
-    .logo .tag { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: .08em; }
-    nav.top-nav { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
-    nav.top-nav button {
-      background: none; border: none; cursor: pointer;
-      font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .05em;
-      text-transform: uppercase; color: var(--ink-soft); padding: 6px 0;
-      border-bottom: 2px solid transparent;
-    }
-    nav.top-nav button.active, nav.top-nav button:hover { color: var(--ink); border-bottom-color: var(--veste); }
-    .top-actions { display: flex; gap: 10px; align-items: center; }
-    .top-actions button {
-      background: none; border: 1px solid var(--line); padding: 6px 14px;
-      font-family: 'Space Mono', monospace; font-size: 11px; text-transform: uppercase;
-      border-radius: 30px;
-    }
-    .top-actions button.primary { background: var(--veste); color: #fff; border-color: var(--veste); }
 
-    /* ===== LAYOUT ===== */
+    /* ===== BANDA SUPERIOR ===== */
+    .season-band { height: 6px; width: 100%; background: linear-gradient(90deg, var(--gold) 0 16.6%, var(--azul) 16.6% 33.3%, var(--verde) 33.3% 50%, var(--roxo) 50% 66.6%, var(--vermelho) 66.6% 83.3%, var(--terra) 83.3% 100%); }
+
+    /* ===== HEADER ===== */
+    header.top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 32px;
+      border-bottom: 1px solid var(--line);
+      background: var(--paper);
+      flex-wrap: wrap;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .logo { display: flex; align-items: baseline; gap: 10px; flex-shrink: 0; }
+    .logo .mark { font-family: 'Fraunces', serif; font-weight: 700; font-size: 26px; color: var(--brand); }
+    .logo .tag { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: .08em; }
+
+    /* ===== MENU PRINCIPAL ===== */
+    nav.top-nav {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      align-items: center;
+      flex: 1;
+      justify-content: center;
+    }
+    nav.top-nav button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      padding: 8px 14px;
+      border-radius: 30px;
+      transition: background .2s, color .2s, border-color .2s;
+      border: 1px solid transparent;
+      font-weight: 500;
+    }
+    nav.top-nav button:hover {
+      background: var(--brand-soft);
+      color: var(--ink);
+      border-color: var(--brand-soft);
+    }
+    nav.top-nav button.active {
+      background: var(--brand);
+      color: #fff;
+      border-color: var(--brand);
+      box-shadow: 0 2px 8px rgba(184,144,46,0.25);
+    }
+    nav.top-nav button.active:hover {
+      background: #a67d28;
+      border-color: #a67d28;
+    }
+
+    /* ===== AÇÕES DO TOPO ===== */
+    .top-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .top-actions button {
+      background: none;
+      border: 1px solid var(--line);
+      padding: 8px 16px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      border-radius: 30px;
+      transition: background .2s, border-color .2s;
+    }
+    .top-actions button:hover { background: var(--brand-soft); border-color: var(--brand); }
+    .top-actions button.primary {
+      background: var(--brand);
+      color: #fff;
+      border-color: var(--brand);
+    }
+    .top-actions button.primary:hover { background: #a67d28; border-color: #a67d28; }
+
+    .user-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      padding: 4px 12px 4px 4px;
+      border-radius: 30px;
+      background: var(--brand-soft);
+      border: 1px solid var(--line);
+    }
+    .user-chip .av {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--brand);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Fraunces', serif;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    /* ===== MENU HAMBURGUER (mobile) ===== */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: 1px solid var(--line);
+      padding: 6px 14px;
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      border-radius: 30px;
+      color: var(--ink-soft);
+      flex-shrink: 0;
+    }
+    .menu-toggle:hover { background: var(--brand-soft); border-color: var(--brand); }
+
+    @media (max-width: 860px) {
+      .menu-toggle { display: block; }
+      nav.top-nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        gap: 4px;
+        padding: 12px 0 6px;
+        border-top: 1px solid var(--line);
+        background: var(--paper);
+        order: 10;
+      }
+      nav.top-nav.open {
+        display: flex;
+      }
+      nav.top-nav button {
+        width: 100%;
+        text-align: left;
+        padding: 10px 16px;
+        border-radius: 8px;
+        border: none;
+        font-size: 13px;
+      }
+      nav.top-nav button:hover {
+        background: var(--brand-soft);
+        border-color: transparent;
+      }
+      nav.top-nav button.active {
+        background: var(--brand);
+        color: #fff;
+        border-color: transparent;
+      }
+      header.top {
+        padding: 12px 18px;
+        gap: 10px;
+      }
+      .logo .tag { display: none; }
+      .top-actions button { font-size: 10px; padding: 6px 12px; }
+    }
+
+    @media (max-width: 480px) {
+      header.top { padding: 10px 14px; }
+      .logo .mark { font-size: 22px; }
+      .top-actions button { font-size: 9px; padding: 4px 10px; }
+      .top-actions button.primary { padding: 4px 12px; }
+      .user-chip { font-size: 10px; padding: 2px 8px 2px 2px; }
+      .user-chip .av { width: 26px; height: 26px; font-size: 11px; }
+    }
+
+    /* ===== RESTO DO LAYOUT ===== */
     main { max-width: 1140px; margin: 0 auto; padding: 30px 32px 80px; }
     .view { display: none; }
     .view.active { display: block; }
 
-    /* ===== SEARCH BAR ===== */
-    .search-box { position: relative; max-width: 520px; margin: 0 0 24px; }
-    .search-box input {
-      width: 100%; padding: 12px 18px; border: 1px solid var(--line);
-      background: var(--paper-raised); font-size: 15px; border-radius: 40px;
-      font-family: 'Literata', serif;
+    /* ===== BOTÕES E CARDS ===== */
+    .cta {
+      background: var(--brand);
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: filter .2s;
+      border-radius: 40px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
+    .cta:hover { filter: brightness(0.92); }
+    .cta.ghost {
+      background: none;
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+    .cta.ghost:hover { background: var(--brand-soft); border-color: var(--brand); }
+
+    .search-box { position: relative; max-width: 520px; margin: 0 0 24px; }
+    .search-box input { width: 100%; padding: 12px 18px; border: 1px solid var(--line); background: var(--paper-raised); font-size: 15px; border-radius: 40px; font-family: 'Literata', serif; }
     .search-suggestions {
       position: absolute; top: 110%; left: 0; right: 0;
       background: var(--paper-raised); border: 1px solid var(--line);
-      border-radius: 12px; padding: 8px 0; max-height: 280px; overflow-y: auto;
+      border-radius: 12px; padding: 8px 0; max-height: 320px; overflow-y: auto;
       display: none; z-index: 30; box-shadow: 0 8px 24px rgba(0,0,0,0.08);
     }
     .search-suggestions.show { display: block; }
-    .search-suggestions .item {
-      padding: 10px 18px; border-bottom: 1px solid var(--line); cursor: pointer;
-      display: flex; justify-content: space-between; font-size: 14px;
-    }
-    .search-suggestions .item:hover { background: var(--gold-soft); }
-    .search-suggestions .item .sub { color: var(--ink-soft); font-size: 12px; }
+    .search-suggestions .item { padding: 10px 18px; border-bottom: 1px solid var(--line); cursor: pointer; display: flex; justify-content: space-between; gap: 10px; font-size: 14px; align-items: center; }
+    .search-suggestions .item:hover { background: var(--brand-soft); }
+    .search-suggestions .item .sub { color: var(--ink-soft); font-size: 12px; white-space: nowrap; }
 
-    /* ===== CARDS ===== */
     .entry-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin: 28px 0; }
-    .entry-card {
-      background: var(--paper-raised); border: 1px solid var(--line);
-      padding: 24px 20px; cursor: pointer; transition: transform .18s, border-color .18s;
-    }
-    .entry-card:hover { transform: translateY(-3px); border-color: var(--veste); }
+    .entry-card { background: var(--paper-raised); border: 1px solid var(--line); padding: 24px 20px; cursor: pointer; transition: transform .18s, border-color .18s; border-radius: 12px; }
+    .entry-card:hover { transform: translateY(-3px); border-color: var(--brand); }
     .entry-card .eyebrow { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--gold); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; display: block; }
     .entry-card h3 { margin: 0 0 8px; font-size: 19px; }
     .entry-card p { margin: 0; color: var(--ink-soft); font-size: 14.5px; }
@@ -105,61 +275,45 @@
     .stats-row .stat { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--ink-soft); }
     .stats-row .stat strong { color: var(--ink); font-size: 18px; display: block; font-family: 'Fraunces', serif; }
 
-    /* ===== TODAY LITURGY ===== */
     .today-card {
       background: var(--paper-raised); border: 1px solid var(--line);
-      padding: 24px 28px; margin: 16px 0 32px; border-left: 6px solid var(--veste);
+      padding: 24px 28px; margin: 16px 0 32px; border-left: 6px solid var(--brand);
       display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
+      border-radius: 12px;
     }
     .today-card .left { flex: 1; min-width: 200px; }
     .today-card .left .small { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--gold); text-transform: uppercase; letter-spacing: .08em; }
     .today-card .left h2 { margin: 4px 0 6px; font-size: 24px; }
     .today-card .left .ev { color: var(--ink-soft); font-size: 15px; }
-    .today-card .cta { background: var(--veste); color: #fff; border: none; padding: 12px 24px; font-family: 'Space Mono', monospace; font-size: 13px; border-radius: 40px; }
 
-    /* ===== SONG LIST ===== */
-    .song-list { display: flex; flex-direction: column; gap: 2px; }
-    .song-row {
-      display: flex; align-items: center; gap: 16px;
-      padding: 14px 18px 14px 0; border-bottom: 1px solid var(--line);
-      cursor: pointer; transition: background .1s;
-    }
-    .song-row:hover { background: rgba(184,144,46,0.05); }
-    .ribbons { display: flex; gap: 3px; flex-shrink: 0; align-self: stretch; }
-    .ribbon { width: 5px; }
-    .ribbon.verde { background: var(--verde); }
-    .ribbon.roxo { background: var(--roxo); }
-    .ribbon.branco { background: var(--branco); }
-    .ribbon.vermelho { background: var(--vermelho); }
-    .song-main { flex: 1; }
-    .song-main .title { font-size: 17px; font-weight: 500; margin-bottom: 2px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-    .song-main .title .fav { font-size: 16px; color: var(--gold); }
-    .song-main .meta { font-size: 13px; color: var(--ink-soft); }
-    .song-stars { font-family: 'Space Mono', monospace; color: var(--gold); font-size: 13px; white-space: nowrap; }
-
-    /* ===== CHIPS ===== */
     .chip-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 24px; }
-    .chip {
-      padding: 8px 16px; border: 1px solid var(--line); background: var(--paper-raised);
-      font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer;
-      text-transform: uppercase; letter-spacing: .03em; border-radius: 30px;
-    }
-    .chip:hover, .chip.active { border-color: var(--veste); background: var(--veste-soft); }
+    .chip { padding: 8px 16px; border: 1px solid var(--line); background: var(--paper-raised); font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer; text-transform: uppercase; letter-spacing: .03em; border-radius: 30px; }
+    .chip:hover, .chip.active { border-color: var(--brand); background: var(--brand-soft); }
 
-    .section-title { display: flex; align-items: baseline; gap: 14px; margin: 0 0 16px; flex-wrap: wrap; }
+    .section-title { display: flex; align-items: baseline; gap: 14px; margin: 0 0 16px; flex-wrap: wrap; justify-content: space-between; }
     .section-title h2 { font-size: 22px; margin: 0; }
     .section-title .count { color: var(--ink-soft); font-family: 'Space Mono', monospace; font-size: 13px; }
 
-    /* ===== SONG DETAIL ===== */
+    .song-list { display: flex; flex-direction: column; gap: 2px; }
+    .song-row { display: flex; align-items: center; gap: 16px; padding: 14px 18px 14px 0; border-bottom: 1px solid var(--line); cursor: pointer; transition: background .1s; }
+    .song-row:hover { background: rgba(184,144,46,0.05); }
+    .m-bar { width: 5px; align-self: stretch; flex-shrink: 0; border-radius: 3px; }
+    .song-main { flex: 1; min-width: 0; }
+    .song-main .title { font-size: 17px; font-weight: 500; margin-bottom: 2px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .song-main .title .fav { font-size: 15px; color: var(--gold); }
+    .song-main .meta { font-size: 13px; color: var(--ink-soft); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .m-tag { font-family: 'Space Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: .04em; padding: 2px 10px; border-radius: 20px; }
+    .song-stars { font-family: 'Space Mono', monospace; color: var(--gold); font-size: 13px; white-space: nowrap; }
+
     .back-link { background: none; border: none; cursor: pointer; font-family: 'Space Mono', monospace; font-size: 12px; color: var(--ink-soft); margin-bottom: 20px; padding: 0; }
+    .back-link:hover { color: var(--ink); }
+
     .song-header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid var(--line); padding-bottom: 20px; margin-bottom: 24px; gap: 24px; flex-wrap: wrap; }
-    .song-header h1 { font-size: 32px; margin: 0 0 4px; }
+    .song-header h1 { font-size: 32px; margin: 0 0 6px; }
     .song-header .composer { color: var(--ink-soft); font-size: 15px; }
-    .song-header .ribbons { height: 44px; }
-    .song-header .ribbon { width: 8px; }
 
     .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 24px; }
-    .tag { font-family: 'Space Mono', monospace; font-size: 11px; padding: 4px 12px; background: var(--gold-soft); color: #5c4713; border-radius: 30px; text-transform: lowercase; }
+    .tag { font-family: 'Space Mono', monospace; font-size: 11px; padding: 4px 12px; background: var(--brand-soft); color: #5c4713; border-radius: 30px; text-transform: lowercase; }
 
     .two-col { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; margin: 20px 0; }
     .rating-block { margin-bottom: 14px; }
@@ -174,75 +328,141 @@
     .comment .text { margin: 4px 0; color: var(--ink); font-size: 14px; }
     .comment .up { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--ink-soft); }
 
-    .stat-badge { display: inline-block; padding: 4px 14px; background: var(--gold-soft); border-radius: 30px; font-size: 12px; font-family: 'Space Mono', monospace; }
+    .stat-badge { display: inline-block; padding: 4px 14px; background: var(--brand-soft); border-radius: 30px; font-size: 12px; font-family: 'Space Mono', monospace; }
 
-    /* ===== PLANNER ===== */
-    .planner-form { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 12px; }
+    /* ===== PLANEJADOR ===== */
+    .planner-form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 12px; }
     .field { display: flex; flex-direction: column; gap: 4px; }
     .field label { font-family: 'Space Mono', monospace; font-size: 11px; text-transform: uppercase; color: var(--ink-soft); }
-    .field select, .field input { padding: 10px 12px; border: 1px solid var(--line); background: var(--paper-raised); font-family: 'Literata', serif; font-size: 14px; border-radius: 8px; }
+    .field select, .field input, .field textarea { padding: 10px 12px; border: 1px solid var(--line); background: var(--paper-raised); font-family: 'Literata', serif; font-size: 14px; border-radius: 8px; }
+    .field textarea { min-height: 60px; resize: vertical; }
     .planner-note { font-size: 13px; color: var(--ink-soft); margin: 12px 0 20px; }
+    .reading-card { background: var(--paper-raised); border: 1px solid var(--line); padding: 18px 22px; border-radius: 12px; margin-bottom: 20px; }
+    .reading-card .theme { font-family: 'Fraunces', serif; font-size: 18px; margin: 6px 0; }
 
-    .moment-block { border: 1px solid var(--line); margin-bottom: 12px; background: var(--paper-raised); border-radius: 8px; }
-    .moment-block .mh { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border-left: 4px solid var(--veste); flex-wrap: wrap; gap: 10px; }
-    .moment-block .mh .name { font-family: 'Space Mono', monospace; text-transform: uppercase; font-size: 12px; color: var(--ink-soft); }
-    .moment-block .mh .song { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 600; }
-    .moment-block .mh button { background: none; border: 1px solid var(--line); padding: 6px 14px; font-family: 'Space Mono', monospace; font-size: 11px; cursor: pointer; border-radius: 30px; }
+    .moment-block {
+      border: 1px solid var(--line);
+      margin-bottom: 12px;
+      background: var(--paper-raised);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: border-color .2s;
+    }
+    .moment-block:hover { border-color: var(--brand); }
+    .moment-block .mh {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .moment-block .mh .name {
+      font-family: 'Space Mono', monospace;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: var(--ink-soft);
+      min-width: 100px;
+    }
+    .moment-block .mh .song-select {
+      flex: 1;
+      min-width: 150px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      font-family: 'Literata', serif;
+      font-size: 14px;
+      background: var(--paper-raised);
+    }
+    .moment-block .mh .song-select:focus { border-color: var(--brand); outline: none; }
+    .moment-block .mh button {
+      background: none;
+      border: 1px solid var(--line);
+      padding: 6px 14px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      cursor: pointer;
+      border-radius: 30px;
+      white-space: nowrap;
+    }
+    .moment-block .mh button:hover { border-color: var(--brand); background: var(--brand-soft); }
 
-    .cta { background: var(--veste); color: #fff; border: none; padding: 12px 24px; font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: .05em; text-transform: uppercase; cursor: pointer; transition: filter .2s; border-radius: 40px; display: inline-flex; align-items: center; gap: 8px; }
-    .cta:hover { filter: brightness(0.92); }
-
-    /* ===== PLAYLIST ===== */
     .playlist-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
     .playlist-card { border: 1px solid var(--line); background: var(--paper-raised); padding: 20px; border-radius: 8px; }
     .playlist-card h3 { margin: 4px 0 6px; font-size: 18px; }
     .playlist-card .n { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--ink-soft); }
 
-    /* ===== BADGES ===== */
-    .badge-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 16px; }
-    .badge { border: 1px solid var(--line); background: var(--paper-raised); padding: 16px 20px; min-width: 140px; text-align: center; border-radius: 12px; }
-    .badge .lvl { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--gold); text-transform: uppercase; }
-    .badge .name { font-family: 'Fraunces', serif; font-weight: 600; margin-top: 4px; }
-
-    /* ===== PROFILE ===== */
     .profile-header { display: flex; align-items: center; gap: 30px; flex-wrap: wrap; margin-bottom: 30px; }
-    .profile-avatar { width: 80px; height: 80px; border-radius: 50%; background: var(--gold-soft); display: flex; align-items: center; justify-content: center; font-size: 32px; font-family: 'Fraunces', serif; color: var(--gold); border: 2px solid var(--line); }
+    .profile-avatar { width: 80px; height: 80px; border-radius: 50%; background: var(--brand-soft); display: flex; align-items: center; justify-content: center; font-size: 32px; font-family: 'Fraunces', serif; color: var(--gold); border: 2px solid var(--line); }
     .profile-stats { display: flex; gap: 30px; flex-wrap: wrap; }
     .profile-stats .ps { text-align: center; }
     .profile-stats .ps .num { font-family: 'Fraunces', serif; font-size: 24px; display: block; }
     .profile-stats .ps .lab { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--ink-soft); text-transform: uppercase; }
 
-    /* ===== FORMS ===== */
+    .fav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .fav-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 8px; cursor: pointer; }
+    .fav-item:hover { background: var(--brand-soft); }
+
+    .empty-state { text-align: center; padding: 50px 20px; color: var(--ink-soft); }
+    .empty-state .glyph { font-size: 34px; margin-bottom: 10px; }
+
+    .overlay { position: fixed; inset: 0; background: rgba(36,31,26,0.45); display: none; align-items: center; justify-content: center; z-index: 100; padding: 20px; }
+    .overlay.show { display: flex; }
+    .modal { background: var(--paper-raised); border-radius: 14px; padding: 28px; max-width: 440px; width: 100%; max-height: 85vh; overflow-y: auto; }
+    .modal h3 { margin: 0 0 6px; font-size: 20px; }
+    .modal .sub { color: var(--ink-soft); font-size: 13px; margin-bottom: 20px; }
+    .modal-close { float: right; background: none; border: none; font-size: 18px; color: var(--ink-soft); cursor: pointer; }
+
+    .profile-pick { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; cursor: pointer; margin-bottom: 10px; }
+    .profile-pick:hover { border-color: var(--brand); background: var(--brand-soft); }
+    .profile-pick .av { width: 44px; height: 44px; border-radius: 50%; background: var(--brand-soft); color: var(--gold); display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-weight: 600; flex-shrink: 0; }
+    .profile-pick .info .n { font-weight: 600; }
+    .profile-pick .info .r { font-size: 12.5px; color: var(--ink-soft); }
+
+    .toast { position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%); background: var(--ink); color: #fff; padding: 12px 22px; border-radius: 30px; font-family: 'Space Mono', monospace; font-size: 13px; z-index: 200; opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(-6px); }
+
+    .footer-note { margin-top: 50px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--ink-soft); font-size: 12px; font-family: 'Space Mono', monospace; }
+
+    /* ===== FORMULÁRIO DE CADASTRO ===== */
     .form-shell { max-width: 700px; }
     fieldset { border: 1px solid var(--line); padding: 20px 22px; margin: 0 0 22px; border-radius: 12px; }
-    legend { font-family: 'Space Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--gold); padding: 0 8px; }
+    legend { font-family: 'Space Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--brand); padding: 0 8px; }
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     .form-grid .field.full { grid-column: 1 / -1; }
     .check-grid { display: flex; flex-wrap: wrap; gap: 6px; }
-    .check-pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border: 1px solid var(--line); font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer; border-radius: 30px; user-select: none; }
-    .check-pill:has(input:checked) { border-color: var(--veste); background: var(--veste-soft); }
+    .check-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border: 1px solid var(--line);
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      cursor: pointer;
+      border-radius: 30px;
+      user-select: none;
+      transition: all .2s;
+    }
+    .check-pill:hover { background: var(--brand-soft); }
+    .check-pill:has(input:checked) { border-color: var(--brand); background: var(--brand-soft); }
+    .check-pill input[type="checkbox"] { accent-color: var(--brand); margin-right: 2px; }
     .form-actions { display: flex; align-items: center; gap: 16px; margin-top: 6px; flex-wrap: wrap; }
+    .form-hint { font-size: 12px; color: var(--ink-soft); }
 
-    /* ===== FAVORITES ===== */
-    .fav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .fav-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 8px; cursor: pointer; }
-    .fav-item:hover { background: var(--gold-soft); }
-
-    /* ===== RESPONSIVE ===== */
     @media (max-width: 760px) {
-      header.top { padding: 14px 18px; }
       main { padding: 20px 18px 60px; }
       .entry-grid, .playlist-grid, .fav-grid { grid-template-columns: 1fr; }
       .two-col { grid-template-columns: 1fr; }
       .planner-form { grid-template-columns: 1fr; }
       .form-grid { grid-template-columns: 1fr; }
-      .top-actions button { font-size: 10px; padding: 4px 10px; }
-      nav.top-nav { gap: 10px; }
       .today-card { flex-direction: column; align-items: flex-start; gap: 14px; }
+      .moment-block .mh { flex-direction: column; align-items: stretch; }
+      .moment-block .mh .song-select { width: 100%; }
     }
     @media (max-width: 480px) {
       .stats-row .stat { font-size: 12px; }
-      .badge { min-width: 100px; flex: 1 1 40%; }
+      .song-main .meta { font-size: 12px; }
     }
   </style>
 </head>
@@ -251,18 +471,20 @@
 <div class="season-band"></div>
 <header class="top">
   <div class="logo"><span class="mark">Cântico</span><span class=""></span></div>
-  <nav class="top-nav" id="top-nav">
+
+  <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">☰ Menu</button>
+
+  <nav class="top-nav" id="topNav">
     <button data-view="home" class="active">Início</button>
+    <button data-view="liturgy">Liturgia</button>
     <button data-view="planner">Planejador</button>
-    <button data-view="addsong">+ Música</button>
     <button data-view="playlists">Playlists</button>
     <button data-view="profile">Perfil</button>
     <button data-view="favorites">Favoritos</button>
+    <button data-view="addsong">+ Nova Música</button>
   </nav>
-  <div class="top-actions">
-    <button onclick="alert('Login social (Google, GitHub, Apple) — protótipo')">Entrar</button>
-    <button class="primary" onclick="alert('Criar conta — protótipo')">Criar conta</button>
-  </div>
+
+  <div class="top-actions" id="top-actions"></div>
 </header>
 
 <main>
@@ -270,79 +492,46 @@
   <!-- ===== HOME ===== -->
   <section class="view active" id="view-home">
     <div class="stats-row">
-      <div class="stat"><strong>1.247</strong> músicas</div>
+      <div class="stat"><strong id="stat-songs">—</strong> músicas</div>
       <div class="stat"><strong>342</strong> colaboradores</div>
-      <div class="stat"><strong>89</strong> playlists</div>
+      <div class="stat"><strong id="stat-playlists">—</strong> playlists</div>
       <div class="stat"><strong>2.140</strong> celebrações</div>
     </div>
 
-    <!-- Liturgia de Hoje -->
-    <div class="today-card">
+    <div class="today-card" id="today-card">
       <div class="left">
-        <div class="small">Liturgia de hoje</div>
-        <h2>16º Domingo do Tempo Comum</h2>
-        <div class="ev">Evangelho: Lc 10,38-42 — Marta e Maria</div>
+        <div class="small" id="today-label">Liturgia de hoje</div>
+        <h2 id="today-title">—</h2>
+        <div class="ev" id="today-gospel">—</div>
       </div>
-      <button class="cta" onclick="openLiturgyDay()">Ver repertório recomendado →</button>
+      <button class="cta" onclick="goView('planner')">Planejar repertório →</button>
     </div>
 
-    <!-- Busca global -->
     <div class="search-box">
-      <input type="text" id="globalSearch" placeholder="Buscar música, compositor, tema, leitura, evangelho..." oninput="handleSearch(this.value)" onfocus="document.getElementById('suggestions').classList.add('show')" onblur="setTimeout(()=>document.getElementById('suggestions').classList.remove('show'),200)" />
+      <input type="text" id="globalSearch" placeholder="Buscar música, número, momento..." oninput="handleSearch(this.value)" onfocus="document.getElementById('suggestions').classList.add('show')" onblur="setTimeout(()=>document.getElementById('suggestions').classList.remove('show'),200)" />
       <div class="search-suggestions" id="suggestions"></div>
     </div>
 
     <div class="entry-grid">
-      <div class="entry-card" onclick="openMoments()"><span class="eyebrow">Por momento</span><h3>Momento da missa</h3><p>Entrada, Ofertório, Comunhão, Final...</p></div>
-      <div class="entry-card" onclick="openSeasons()"><span class="eyebrow">Por tempo</span><h3>Tempo litúrgico</h3><p>Advento, Quaresma, Páscoa, Pentecostes...</p></div>
-      <div class="entry-card" onclick="openLiturgyDay()"><span class="eyebrow">Por leitura</span><h3>Liturgia do Dia</h3><p>Evangelho, Salmo, leituras — com recomendações</p></div>
+      <div class="entry-card" onclick="goView('planner')"><span class="eyebrow">Planeje</span><h3>Planejador</h3><p>Monte seu repertório manualmente, escolha cada música e salve como playlist</p></div>
+      <div class="entry-card" onclick="goView('addsong')"><span class="eyebrow">Contribua</span><h3>+ Nova Música</h3><p>Cadastre músicas com informações completas: momento, links, letra, tom...</p></div>
+      <div class="entry-card" onclick="goView('playlists')"><span class="eyebrow">Comunidade</span><h3>Playlists</h3><p>Repertórios prontos, incluindo os que você criar</p></div>
     </div>
-
-    <div style="margin-top:20px; display:flex; gap:12px; flex-wrap:wrap;">
-      <button class="cta" style="background:var(--roxo);" onclick="openSeasons()">Tempo Litúrgico</button>
-      <button class="cta" style="background:var(--vermelho);" onclick="openMoments()">Momento da Missa</button>
-      <button class="cta" style="background:var(--branco);color:var(--ink);" onclick="goView('planner')">Planejar Missa</button>
-    </div>
-  </section>
-
-  <!-- ===== MOMENTOS ===== -->
-  <section class="view" id="view-moments">
-    <button class="back-link" onclick="goView('home')">← voltar</button>
-    <div class="section-title"><h2>Momento da missa</h2></div>
-    <div class="chip-row" id="moment-chips"></div>
-    <div class="section-title"><h2 id="moment-title">Entrada</h2><span class="count" id="moment-count"></span></div>
-    <div class="song-list" id="moment-songs"></div>
-  </section>
-
-  <!-- ===== TEMPOS ===== -->
-  <section class="view" id="view-seasons">
-    <button class="back-link" onclick="goView('home')">← voltar</button>
-    <div class="section-title"><h2>Tempo litúrgico</h2></div>
-    <div class="chip-row" id="season-chips"></div>
-    <div class="section-title"><h2 id="season-title">Tempo Comum</h2><span class="count" id="season-count"></span></div>
-    <div class="song-list" id="season-songs"></div>
   </section>
 
   <!-- ===== LITURGIA DO DIA ===== -->
   <section class="view" id="view-liturgy">
     <button class="back-link" onclick="goView('home')">← voltar</button>
-    <div class="section-title"><h2 id="liturgy-title">16º Domingo do Tempo Comum</h2></div>
-    <div style="background:var(--paper-raised);border:1px solid var(--line);padding:20px 24px;border-radius:12px;margin-bottom:24px;">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-        <div><span class="stat-badge">Ano C</span></div>
-        <div><span class="stat-badge">Cor: Verde</span></div>
-        <div><strong>1ª Leitura:</strong> Gn 18,1-10a</div>
-        <div><strong>Salmo:</strong> Sl 15(16),1-2a.5.7-8.9-10.11</div>
-        <div><strong>2ª Leitura:</strong> Cl 1,24-28</div>
-        <div><strong>Evangelho:</strong> Lc 10,38-42</div>
+    <div class="section-title"><h2>Liturgia Diária</h2><span class="count">semana de 13 a 19 de julho</span></div>
+    <div class="chip-row" id="liturgy-chips"></div>
+
+    <div id="liturgy-content">
+      <div class="reading-card" id="liturgy-readings"></div>
+      <div id="liturgy-songs-container"></div>
+      <div style="margin-top:24px;">
+        <h3>Comentários sobre esta celebração</h3>
+        <div id="liturgy-comments"></div>
       </div>
-    </div>
-    <div style="margin-bottom:16px;"><span class="stat-badge" style="background:var(--verde);color:#fff;">Recomendações da comunidade</span></div>
-    <div class="song-list" id="liturgy-songs"></div>
-    <div style="margin-top:24px;">
-      <h3>Comentários sobre esta celebração</h3>
-      <div class="comment"><div class="who">Catequista Ana</div><div class="text">O Evangelho de Marta e Maria é ótimo para destacar a escuta da Palavra. Sugiro "A Tua Palavra" na Aclamação.</div><div class="up">👍 12</div></div>
-      <div class="comment"><div class="who">Pe. Marcos</div><div class="text">Na homilia, podemos conectar com o serviço. "Eis-me Aqui" no ofertório combina bem.</div><div class="up">👍 8</div></div>
     </div>
   </section>
 
@@ -351,238 +540,698 @@
     <button class="back-link" onclick="goBackFromSong()">← voltar</button>
     <div class="song-header">
       <div><h1 id="song-title">—</h1><div class="composer" id="song-composer">—</div></div>
-      <div class="ribbons" id="song-ribbons"></div>
     </div>
     <div class="tag-list" id="song-tags"></div>
     <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
-      <button class="cta" style="padding:8px 20px;font-size:12px;" onclick="alert('Adicionado ao repertório da celebração atual!')">+ Adicionar ao repertório</button>
-      <button class="cta" style="background:var(--gold);padding:8px 20px;font-size:12px;" onclick="toggleFavorite()">★ Favoritar</button>
+      <button class="cta" style="padding:8px 20px;font-size:12px;" onclick="showToast('Adicionado ao repertório!')">+ Adicionar ao repertório</button>
+      <button class="cta ghost" style="padding:8px 20px;font-size:12px;" id="song-fav-btn" onclick="toggleFavCurrent()">★ Favoritar</button>
     </div>
-    <div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:16px;">
-      <span class="stat-badge">❤️ 43 favoritos</span>
-      <span class="stat-badge">📋 12 playlists</span>
-      <span class="stat-badge">🏛️ 8 comunidades</span>
-      <span class="stat-badge">📖 Usado em: Entrada, Aclamação</span>
-      <span class="stat-badge">📅 Tempos: Verde, Roxo</span>
-    </div>
-
+    <div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:16px;" id="song-badges"></div>
     <div class="two-col">
       <div>
         <h3>Recursos</h3>
         <div class="resource-links" id="song-resources"></div>
-        <h3>Relação com leituras</h3>
-        <div id="song-scriptures" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;"></div>
         <h3>Comentários</h3>
         <div id="song-comments"></div>
       </div>
       <div>
-        <h3>Avaliações da comunidade</h3>
-        <div class="rating-block"><div class="label">Liturgicamente adequada</div><div class="stars">★★★★★</div><div style="font-size:12px;color:var(--ink-soft);">92% recomendam</div></div>
+        <h3>Avaliações</h3>
+        <div class="rating-block"><div class="label">Liturgicamente adequada</div><div class="stars">★★★★★</div></div>
         <div class="rating-block"><div class="label">Fácil de tocar</div><div class="stars">★★★★☆</div></div>
-        <div class="rating-block"><div class="label">Assembleia canta bem</div><div class="stars"><span style="font-size:18px;">👍</span> 85%</div></div>
-        <div class="rating-block"><div class="label">Indicada para iniciantes</div><div class="stars"><span style="font-size:18px;">👍</span> 72%</div></div>
-        <div class="rating-block"><div class="label">Serve bem para Entrada</div><div class="stars"><span style="font-size:18px;">👍</span> 88%</div></div>
-        <div style="margin-top:16px;border-top:1px solid var(--line);padding-top:14px;">
-          <div style="font-size:13px;color:var(--ink-soft);">Nível de confiança da recomendação</div>
-          <div style="font-family:'Space Mono',monospace;font-size:14px;color:var(--verde);">🔹 Recomendação forte — usado por 156 comunidades</div>
-        </div>
+        <div class="rating-block"><div class="label">Assembleia canta bem</div><div class="stars">👍 85%</div></div>
       </div>
     </div>
   </section>
 
-  <!-- ===== PLANEJADOR ===== -->
+  <!-- ===== PLANEJADOR (MANUAL) ===== -->
   <section class="view" id="view-planner">
-    <div class="section-title"><h2>Planejador da celebração</h2></div>
-    <p class="planner-note">Escolha a data e o tipo — o sistema sugere repertório baseado nas leituras.</p>
+    <div class="section-title"><h2>Planejador de Repertório</h2></div>
+    <p class="planner-note">Selecione manualmente cada música para cada momento da missa. Escolha o nome e a data para salvar sua playlist.</p>
+
     <div class="planner-form">
-      <div class="field"><label>Data</label><input type="date" id="planner-date" value="2026-07-19"></div>
-      <div class="field"><label>Tipo</label><select id="planner-type"><option>Dominical</option><option>Casamento</option><option>Crisma</option><option>Retiro</option></select></div>
-      <div class="field"><label>Tempo litúrgico</label><select id="planner-season" onchange="setVeste(this.value)"><option value="verde">Tempo Comum</option><option value="roxo">Advento / Quaresma</option><option value="branco">Natal / Páscoa</option><option value="vermelho">Pentecostes / Mártires</option></select></div>
+      <div class="field"><label>Nome da playlist</label><input type="text" id="playlist-name" placeholder="Ex: Missa de Crisma" /></div>
+      <div class="field"><label>Data da celebração</label><input type="date" id="playlist-date" value="2026-07-19" /></div>
+      <div class="field"><label>Tipo de celebração</label>
+        <select id="playlist-type">
+          <option value="Dominical">Dominical</option>
+          <option value="Casamento">Casamento</option>
+          <option value="Crisma">Crisma</option>
+          <option value="Retiro">Retiro</option>
+          <option value="Missão">Missão</option>
+          <option value="Outro">Outro</option>
+        </select>
+      </div>
+      <div class="field"><label>Observações</label>
+        <textarea id="playlist-obs" placeholder="Detalhes sobre a celebração, tema, leituras..."></textarea>
+      </div>
     </div>
-    <button class="cta" style="margin-bottom:20px;" onclick="renderPlan()">Gerar sugestão</button>
-    <div id="plan-reading" class="planner-note"></div>
-    <div id="plan-list"></div>
+
+    <div id="planner-moments"></div>
+
+    <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:16px;">
+      <button class="cta" onclick="savePlaylist()">💾 Salvar playlist</button>
+      <button class="cta ghost" onclick="clearPlanner()">Limpar tudo</button>
+    </div>
+
+    <div id="plan-save-feedback" class="planner-note" style="margin-top:12px;display:none;"></div>
   </section>
 
   <!-- ===== PLAYLISTS ===== -->
   <section class="view" id="view-playlists">
-    <div class="section-title"><h2>Playlists da comunidade</h2><span class="count">compartilháveis</span></div>
+    <div class="section-title"><h2>Playlists</h2><span class="count" id="playlist-count"></span></div>
     <div class="playlist-grid" id="playlist-grid"></div>
   </section>
 
   <!-- ===== PERFIL ===== -->
   <section class="view" id="view-profile">
     <div class="section-title"><h2>Meu Perfil</h2></div>
-    <div class="profile-header">
-      <div class="profile-avatar">JP</div>
-      <div>
-        <h3 style="margin:0;">João Paulo</h3>
-        <div style="color:var(--ink-soft);">Músico litúrgico · desde 2024</div>
-        <div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap;">
-          <span class="stat-badge">🎵 23 músicas</span>
-          <span class="stat-badge">💬 45 comentários</span>
-          <span class="stat-badge">📋 6 playlists</span>
-          <span class="stat-badge">⭐ 12 favoritas</span>
+    <div id="profile-logged-out" class="empty-state" style="display:none;">
+      <div class="glyph">🔒</div>
+      <p>Entre para ver seu perfil, suas músicas salvas e suas contribuições.</p>
+      <button class="cta" onclick="openLogin()">Entrar</button>
+    </div>
+    <div id="profile-logged-in">
+      <div class="profile-header">
+        <div class="profile-avatar" id="profile-avatar">—</div>
+        <div>
+          <h3 style="margin:0;" id="profile-name">—</h3>
+          <div style="color:var(--ink-soft);" id="profile-role">—</div>
+          <div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap;" id="profile-mini-badges"></div>
         </div>
       </div>
+      <div class="profile-stats" style="margin-bottom:24px;" id="profile-stats"></div>
+      <h3>Minhas favoritas</h3>
+      <div class="fav-grid" id="profile-favs"></div>
     </div>
-    <div class="profile-stats" style="margin-bottom:24px;">
-      <div class="ps"><span class="num">342</span><span class="lab">contribuições</span></div>
-      <div class="ps"><span class="num">18</span><span class="lab">músicas cadastradas</span></div>
-      <div class="ps"><span class="num">45</span><span class="lab">comentários</span></div>
-      <div class="ps"><span class="num">6</span><span class="lab">playlists públicas</span></div>
-    </div>
-    <h3>Minhas favoritas</h3>
-    <div class="fav-grid" id="profile-favs"></div>
   </section>
 
   <!-- ===== FAVORITOS ===== -->
   <section class="view" id="view-favorites">
-    <div class="section-title"><h2>Minhas músicas favoritas</h2></div>
+    <div class="section-title"><h2>Favoritos</h2></div>
     <div class="song-list" id="favorites-list"></div>
   </section>
 
-  <!-- ===== CADASTRO ===== -->
+  <!-- ===== CADASTRO DE MÚSICA ===== -->
   <section class="view" id="view-addsong">
     <button class="back-link" onclick="goView('home')">← voltar</button>
     <div class="section-title"><h2>Cadastrar nova música</h2></div>
-    <p class="planner-note">Após revisão por um moderador, a música entra no catálogo público.</p>
+    <p class="planner-note">Preencha os dados da música. Ela aparecerá no catálogo após revisão de um moderador.</p>
+
     <form class="form-shell" id="addsong-form" onsubmit="submitSong(event)">
       <fieldset>
         <legend>Dados básicos</legend>
         <div class="form-grid">
-          <div class="field"><label>Nome *</label><input type="text" id="f-title" required></div>
-          <div class="field"><label>Compositor</label><input type="text" id="f-composer"></div>
-          <div class="field"><label>Ministério</label><input type="text" id="f-ministry"></div>
-          <div class="field"><label>Ano</label><input type="number" id="f-year" min="1900" max="2100"></div>
-          <div class="field"><label>Tom</label><input type="text" id="f-key" placeholder="Sol maior"></div>
-          <div class="field"><label>Ritmo</label><input type="text" id="f-rhythm" placeholder="pop"></div>
+          <div class="field"><label>Nome da música *</label><input type="text" id="f-title" required /></div>
+          <div class="field"><label>Compositor *</label><input type="text" id="f-composer" required /></div>
+          <div class="field"><label>Ministério / Banda</label><input type="text" id="f-ministry" /></div>
+          <div class="field"><label>Ano</label><input type="number" id="f-year" min="1900" max="2100" /></div>
+          <div class="field"><label>Tom original</label><input type="text" id="f-key" placeholder="Ex: Sol maior" /></div>
+          <div class="field"><label>BPM</label><input type="text" id="f-bpm" placeholder="Ex: 84" /></div>
+          <div class="field"><label>Ritmo</label><input type="text" id="f-rhythm" placeholder="Ex: Balada, Samba, Rock" /></div>
+          <div class="field"><label>Dificuldade</label>
+            <select id="f-difficulty">
+              <option value="Iniciante">Iniciante</option>
+              <option value="Intermediário" selected>Intermediário</option>
+              <option value="Avançado">Avançado</option>
+            </select>
+          </div>
         </div>
       </fieldset>
+
       <fieldset>
-        <legend>Classificação litúrgica</legend>
-        <div class="field full"><label>Momento da missa</label><div class="check-grid" id="f-moments"></div></div>
-        <div class="field full"><label>Tempo litúrgico</label><div class="check-grid" id="f-seasons"></div></div>
-        <div class="field full"><label>Temas</label><div class="check-grid" id="f-themes"></div></div>
+        <legend>Momento da missa</legend>
+        <div class="field full">
+          <label>Selecione em quais momentos esta música pode ser usada:</label>
+          <div class="check-grid" id="f-moments"></div>
+        </div>
+        <div class="field full" style="margin-top:12px;">
+          <label>Tempos litúrgicos</label>
+          <div class="check-grid" id="f-seasons"></div>
+        </div>
       </fieldset>
+
       <fieldset>
-        <legend>Recursos</legend>
+        <legend>Links e recursos</legend>
         <div class="form-grid">
-          <div class="field"><label>Spotify</label><input type="url" id="f-spotify" placeholder="https://"></div>
-          <div class="field"><label>YouTube</label><input type="url" id="f-youtube" placeholder="https://"></div>
-          <div class="field"><label>Cifra Club</label><input type="url" id="f-cifra" placeholder="https://"></div>
-          <div class="field"><label>PDF partitura</label><input type="file" id="f-pdf" accept=".pdf"></div>
-          <div class="field"><label>Playback</label><input type="file" id="f-playback" accept="audio/*"></div>
-          <div class="field full"><label>Observações</label><textarea id="f-notes" rows="3" placeholder="Dicas de execução, liturgia..."></textarea></div>
+          <div class="field"><label>YouTube (vídeo)</label><input type="url" id="f-youtube" placeholder="https://youtube.com/..." /></div>
+          <div class="field"><label>Spotify</label><input type="url" id="f-spotify" placeholder="https://spotify.com/..." /></div>
+          <div class="field"><label>Cifra Club</label><input type="url" id="f-cifra" placeholder="https://cifraclub.com/..." /></div>
+          <div class="field"><label>Letra (texto)</label>
+            <textarea id="f-lyrics" rows="4" placeholder="Digite a letra da música aqui..."></textarea>
+          </div>
+          <div class="field full"><label>Observações / dicas litúrgicas</label>
+            <textarea id="f-notes" rows="3" placeholder="Em qual momento da missa funciona melhor, dicas de execução, referências bíblicas..."></textarea>
+          </div>
         </div>
       </fieldset>
+
       <div class="form-actions">
         <button type="submit" class="cta">Enviar para revisão</button>
-        <span class="form-hint" style="font-size:12px;color:var(--ink-soft);">Aparece no seu perfil imediatamente</span>
+        <span class="form-hint">Após aprovação, a música entra no catálogo público.</span>
       </div>
     </form>
   </section>
 
-  <div class="footer-note" style="margin-top:50px;padding-top:16px;border-top:1px solid var(--line);color:var(--ink-soft);font-size:12px;font-family:'Space Mono',monospace;">Cânticos — protótipo completo · @delabeneta1</div>
+  <div class="footer-note">Cântico — protótipo · @delabeneta1</div>
 </main>
+
+<!-- Overlays -->
+<div class="overlay" id="overlay-login">
+  <div class="modal">
+    <button class="modal-close" onclick="closeOverlay('overlay-login')">✕</button>
+    <h3>Entrar</h3>
+    <div class="sub">Escolha um perfil para simular o login (protótipo).</div>
+    <div id="login-profile-list"></div>
+    <button class="cta ghost" style="width:100%;justify-content:center;margin-top:6px;" onclick="closeOverlay('overlay-login'); openSignup();">Criar uma conta nova</button>
+  </div>
+</div>
+
+<div class="overlay" id="overlay-signup">
+  <div class="modal">
+    <button class="modal-close" onclick="closeOverlay('overlay-signup')">✕</button>
+    <h3>Criar conta</h3>
+    <div class="sub">Protótipo — os dados ficam apenas nesta sessão.</div>
+    <div class="field"><label>Nome</label><input type="text" id="signup-name" placeholder="Seu nome completo" /></div>
+    <div class="field"><label>Função</label><input type="text" id="signup-role" placeholder="Ex: Músico litúrgico" /></div>
+    <button class="cta" style="width:100%;justify-content:center;margin-top:8px;" onclick="createAccount()">Criar e entrar</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
 
 <script>
   // ============================================================
-  // DATA
+  // MOMENTOS E CORES
   // ============================================================
-  const SONGS = [
-    {id:1, title:"A Tua Palavra", composer:"Pe. Zezinho", ministry:"Renovação", tags:["evangelho","palavra","missão","envio"], seasons:["verde","vermelho"], moments:["Aclamação","Comunhão"], stars:5, scriptures:["Lc 8,4-15","Jo 6","Lc 24,13-35"],
-      resources:{spotify:true, youtube:true, cifra:true},
-      comments:[{who:"Carlos",text:"Usamos no retiro, ficou excelente.",up:23},{who:"João",text:"Combina com João 6.",up:9}]},
-    {id:2, title:"Semeador", composer:"Ir. Miria T. Kolling", ministry:"Franciscanos", tags:["palavra","missão","vocação"], seasons:["verde"], moments:["Entrada","Aclamação"], stars:5, scriptures:["Lc 8,4-15"],
-      resources:{spotify:true, youtube:true, cifra:false},
-      comments:[{who:"Maria",text:"Usamos no ofertório também.",up:10}]},
-    {id:3, title:"Eis-me Aqui", composer:"Pe. José Weber", ministry:"Nova Aliança", tags:["vocação","missão","envio"], seasons:["verde","roxo"], moments:["Ofertório"], stars:4, scriptures:["Is 6,8","Lc 10,38-42"],
-      resources:{spotify:true, youtube:false, cifra:true}, comments:[]},
-    {id:4, title:"Fala Senhor", composer:"Ministério Koinonya", ministry:"Koinonya", tags:["palavra","chamado"], seasons:["verde"], moments:["Aclamação"], stars:4, scriptures:["1Sm 3,1-10"],
-      resources:{spotify:false, youtube:true, cifra:true}, comments:[]},
-    {id:5, title:"Eu Sou o Pão Vivo", composer:"Pe. Joãozinho", ministry:"Comunidade", tags:["eucaristia","comunhão"], seasons:["branco","verde"], moments:["Comunhão"], stars:5, scriptures:["Jo 6,35-51"],
-      resources:{spotify:true, youtube:true, cifra:true}, comments:[{who:"Rafael",text:"Assembleia canta muito.",up:14}]},
-    {id:6, title:"Pão da Vida", composer:"Emival Ferreira", ministry:"Canção Nova", tags:["eucaristia","comunhão"], seasons:["branco"], moments:["Comunhão"], stars:5, scriptures:["Jo 6"],
-      resources:{spotify:true, youtube:true, cifra:false}, comments:[]},
-    {id:7, title:"Quem Come Minha Carne", composer:"Pe. Fabrício", ministry:"Shalom", tags:["eucaristia"], seasons:["branco","verde"], moments:["Comunhão"], stars:4, scriptures:["Jo 6,52-58"],
-      resources:{spotify:false, youtube:true, cifra:true}, comments:[]},
-    {id:8, title:"Vinde Espírito Santo", composer:"Tradicional", ministry:"Tradicional", tags:["espírito santo","louvor"], seasons:["vermelho"], moments:["Entrada"], stars:5, scriptures:["At 2,1-13"],
-      resources:{spotify:true, youtube:true, cifra:true}, comments:[]},
-    {id:9, title:"Envia Teu Espírito", composer:"Ministério Adonai", ministry:"Adonai", tags:["espírito santo","missão"], seasons:["vermelho"], moments:["Entrada","Final"], stars:5, scriptures:["At 2","Rm 8,14-27"],
-      resources:{spotify:true, youtube:true, cifra:true}, comments:[]},
-    {id:10, title:"Fogo Abrasador", composer:"Diante do Trono", ministry:"Diante do Trono", tags:["espírito santo","louvor"], seasons:["vermelho"], moments:["Comunhão"], stars:4, scriptures:["At 2"],
-      resources:{spotify:true, youtube:true, cifra:false}, comments:[]},
-    {id:11, title:"Renova-me", composer:"Pe. Joãozinho", ministry:"Comunidade", tags:["espírito santo","santidade"], seasons:["vermelho","verde"], moments:["Comunhão"], stars:4, scriptures:["Sl 51"],
-      resources:{spotify:true, youtube:false, cifra:true}, comments:[]},
-    {id:12, title:"Porque Ele Vive", composer:"Tradicional", ministry:"Tradicional", tags:["ressurreição","eucaristia"], seasons:["branco"], moments:["Comunhão"], stars:5, scriptures:["Mt 28,1-10"],
-      resources:{spotify:true, youtube:true, cifra:true}, comments:[]},
-    {id:13, title:"Tão Sublime Sacramento", composer:"São Tomás de Aquino", ministry:"Tradicional", tags:["eucaristia","santidade"], seasons:["branco"], moments:["Comunhão"], stars:5, scriptures:["Jo 6"],
-      resources:{spotify:false, youtube:true, cifra:true}, comments:[]},
-    {id:14, title:"Tua Palavra é Vida", composer:"Ministério Zoe", ministry:"Zoe", tags:["palavra","missão"], seasons:["verde"], moments:["Aclamação","Comunhão"], stars:3, scriptures:["Dt 8,3","Jo 6,63"],
-      resources:{spotify:true, youtube:true, cifra:false}, comments:[]},
+  const MOMENTS = ["Entrada","Aclamação","Ofertório","Comunhão","Pós-Comunhão","Final"];
+  const MOMENT_COLOR = {
+    "Entrada": "gold", "Aclamação": "azul", "Ofertório": "verde",
+    "Comunhão": "roxo", "Pós-Comunhão": "vermelho", "Final": "terra"
+  };
+
+  // ============================================================
+  // PARSER DAS LISTAS REAIS DE HINÁRIO
+  // ============================================================
+  function parseSongBlock(raw, moment, prefix) {
+    return raw.split('\n').map(l => l.trim()).filter(Boolean).map((line, i) => {
+      let code = null;
+      const m = line.match(/[-\s]+(\d{2,4})\.?\s*$/);
+      let title = line;
+      if (m) {
+        code = m[1];
+        title = line.slice(0, m.index);
+      }
+      title = title.replace(/[-,]\s*$/,'').trim();
+      let h = 0;
+      for (let c = 0; c < title.length; c++) h = (h * 31 + title.charCodeAt(c)) % 997;
+      return {
+        id: prefix + i,
+        title,
+        code,
+        moment,
+        stars: 3 + (h % 3),
+        favCount: 4 + (h % 60),
+        resources: { spotify: h % 3 !== 0, youtube: h % 4 !== 0, cifra: h % 2 === 0 },
+        comments: []
+      };
+    });
+  }
+
+  const COMUNHAO_RAW = `A barca -206
+A Força da Eucaristia
+Aonde iremos nós-848
+Antes da morte e ressurreição de Jesus
+Cada vez que comemos desse pão
+Cantar a beleza da vida-780
+Comei, tomai
+Como és lindo- 997
+Corpo Santo
+Dai-lhes de Comer-1733
+De coração
+Desamarrem as sandálias
+Deus é capaz
+Deus presente
+É bom estarmos juntos(Maria de Deus Senhora da Paz)
+É Comunhão
+Eis que sou o pão da vida
+Elevo os meus olhos
+Em teu altar Senhor
+Entre nós
+Estas entre nós
+Estou a porta e peço entrada
+Eu sou o pão da vida 407
+Eu sou o pão do céu
+Eu vim para que todos tenham vida
+Feliz o homem que ama o Senhor
+Fica conosco Senhor
+Fonte de viver
+Joia rara
+Majestosa eucaristia-
+Mesa pronta -1372.
+Mestre
+Milagre de Amor -Juliana de Paula
+Na mesa da eucaristia
+Na mesa sagrada-785
+No deserto da vida
+O meu corpo e o meu sangue te dou
+Oração de São Francisco
+Oração pela paz- 846
+O Senhor ressurgiu -1341
+Ó trindade- 1373
+Pai de amor
+Pão da vida-838
+Pão dos anjos
+Partilhar é vocação
+Pelos prados- 593
+Por amor
+Por entre aclamações
+Por essa paz que a juventude tanto quer
+Povo de Deus Foi assim
+Presença de Jesus- Preciosas são as horas
+Presença Real
+Profeta do amor-1002
+Procuro abrigo nos corações
+Prova de amor maior não há
+Quando entro nesta procissão
+Quando teu pai revelou-253
+Que bom Senhor
+Recebe adoração
+Rumo ao altar
+Sacramento da comunhão
+Se calarem a voz dos profetas-1511
+Simplesmente amar
+Sublime refeição- 1565
+Tanto Deus amou o mundo
+Tão simples assim tão fácil assim
+Te entregas a mim
+Teu missionário-1083
+Todo aquele que comer-
+Tomai, comei
+Tu és minha vida- 507
+Tu nos atraístes-
+Vejam eu andei pelas vilas-
+Vem comigo a minha mesa-
+Vem, eu mostrarei
+Venho senhor te receber agora- 880
+Verbum Panis
+Vou navegar-1513
+Vou cantar seu amor 818`;
+
+  const POSCOMUNHAO_RAW = `A chave do coração
+Abraço de Pai
+Alguém rezando
+Alma de amigo
+Alma Missionária
+Amar-te mais
+Ao teu encontro
+A Ele a glória!-Católicas
+A Tempestade vai passar
+Ave Maria-mãe da Igreja
+Basta Querer
+Caminhada
+Cântico de Adoração
+Chamado -Adriana
+Confia em mim
+Coração chagado
+Deus Imenso
+Deus me levanta
+Diante do Rei
+Doce é sentir
+É impossível
+Eis me aqui
+Em tua presença
+Espera no Senhor
+Estou aqui
+Estava com saudade de ti
+Eu preciso de você
+Eu quisera Jesus adorado
+Eu seguirei- Frei Gilson
+Eu te louvarei Senhor
+Fala Senhor
+Filho do céu
+Força e vitória
+Graças Pai
+Gratidão
+Hoje livre sou
+Invade minh'alma
+Já não sou eu que vive
+Jesus esta aqui
+Jesus esta aqui, Tudo é possível..
+Jesus, eu te adoro
+Lindo Céu
+Livre acesso
+Meu alvo
+Meu coração pertence a ti
+Milagre de amor
+Minha Essência
+Na Tua Presença
+Nas Asas do Senhor
+Não dá mais pra voltar
+Não desista do amor
+Ninguém te ama como eu
+Noites Traiçoeiras
+Nossa Missão
+Obrigado Senhor
+Olha pra mim
+O Senhor esta aqui
+Poderoso Deus
+Podes Reinar
+Quem perde sua vida, a encontra
+Reina em Mim
+Renova-me, Senhor Jesus
+Restauração
+Restaura nossa casa Senhor
+Sem coração
+Só em Deus
+Sonda-me
+Sonho de paz
+Só por ti Jesus
+Tão perto de mim
+Tão Sublime sacramento
+Te louvo em verdade
+Tenha sede de Deus
+Teus Planos-Juninho Cassimiro
+Toca Senhor-Oração de cura
+Tudo é do Pai
+Tudo é possível, se você crê em Deus
+Um consagrado para amar
+Vaso Novo-340
+Venho a ti
+Venho aqui Senhor, a teus pés
+Verdades do Tempo`;
+
+  const OFERTORIO_RAW = `A liberdade haverá-1527
+A mesa santa que preparamos- 845
+A nossa oferta apresentamos no altar-1331
+As nossas mão se abrem
+As sementes que me deste- 1323
+A ti meu Deus- 834
+Bendito e louvado seja
+De mãos estendidas- 293
+Em procissão vão o pão e o vinho
+É prova de amor-784
+Este pranto em minhas mãos- 314
+Eu creio num mundo novo
+Eu quero ser de Deus
+Fala-me da vida-1312
+Lição de amor
+Mãos abertas 416
+Mãos na terra( Estar em tuas mãos) 1844
+Muitos grãos de trigo-1317
+Meu coração é para ti 647
+Nossa oferta de Amor
+Nova pessoa- 971
+Oferta de Amor-Venho Senhor minha vida oferecer
+Ofertas Singelas
+Ofertório São José
+Ó Pai que pelo espírito
+Os dons que trago aqui
+Os grãos que formam a espiga
+O que temos Senhor
+Ó trindade imensa e una
+Pão e Vinho
+Pão e vinho,Pai,Poremos
+Pois pra te adorar -1437
+Quando o trigo amadurece-1350
+Que mais eu posso te dar-
+Que poderei retribuir ao Senhor
+Queremos oferecer-1512
+Quem nos separará
+Quem disse que não somos nada,
+Recebe Deus amigo
+Sabes Senhor-189
+Sê bendito Senhor para sempre-
+Só em ti viver- 569
+Sou bom pastor
+Suba a ti ó Deus pai-1371
+Trazemos a mesa Santa
+Teu sou- 422
+Um coração para amar-520
+Venho a ti-484
+Venho,Senhor, minha vida oferecer-1437
+Venho Senhor oferecer-1013
+Volta teu olhar Senhor
+Vou te oferecer a vida`;
+
+  const SONGS_OFERTORIO = parseSongBlock(OFERTORIO_RAW, "Ofertório", "ofe");
+  const SONGS_COMUNHAO = parseSongBlock(COMUNHAO_RAW, "Comunhão", "com");
+  const SONGS_POSCOMUNHAO = parseSongBlock(POSCOMUNHAO_RAW, "Pós-Comunhão", "pos");
+
+  function mockList(titles, moment, prefix) {
+    return titles.map((title, i) => ({
+      id: prefix + i, title, code: null, moment,
+      stars: 4 + (i % 2), favCount: 10 + i * 3,
+      resources: { spotify: true, youtube: true, cifra: i % 2 === 0 }, comments: []
+    }));
+  }
+  const SONGS_ENTRADA = mockList(["Vinde Espírito Santo","Envia Teu Espírito","Vem, Senhor, Reunir Teu Povo","Bendize, ó Minh'Alma","Cantai ao Senhor um Cântico Novo","Alegrai-vos no Senhor"], "Entrada", "ent");
+  const SONGS_ACLAMACAO = mockList(["A Tua Palavra","Semeador","Aleluia, Palavra da Vida","Toda Criatura Aclame o Senhor","Fala, Senhor, Fala"], "Aclamação", "acl");
+  const SONGS_FINAL = mockList(["Ide por Todo o Mundo","Maria, Mãe da Igreja","Vamos Celebrar em Missão","Ao Deus a Quem Adoro","Envia Teu Espírito"], "Final", "fin");
+
+  const SONGS = [...SONGS_ENTRADA, ...SONGS_ACLAMACAO, ...SONGS_OFERTORIO, ...SONGS_COMUNHAO, ...SONGS_POSCOMUNHAO, ...SONGS_FINAL];
+  const SONGS_BY_MOMENT = {
+    "Entrada": SONGS_ENTRADA, "Aclamação": SONGS_ACLAMACAO, "Ofertório": SONGS_OFERTORIO,
+    "Comunhão": SONGS_COMUNHAO, "Pós-Comunhão": SONGS_POSCOMUNHAO, "Final": SONGS_FINAL
+  };
+  function findSong(id) { return SONGS.find(s => s.id === id); }
+
+  // ============================================================
+  // LITURGIA DA SEMANA
+  // ============================================================
+  const LITURGY_DATA = [
+    { key:"2026-07-13", label:"Seg 13", weekday:"Segunda-feira", week:"15ª Semana do Tempo Comum",
+      readings:"Is 1,10-17 · Sl 49 · Mt 10,34—11,1",
+      theme:"Deus pede coerência entre culto e justiça, e Jesus convida a uma escolha radical por Ele acima de qualquer laço." },
+    { key:"2026-07-14", label:"Ter 14", weekday:"Terça-feira", week:"15ª Semana do Tempo Comum",
+      readings:"Is 7,1-9 · Sl 47 · Mt 11,20-24",
+      theme:"Isaías pede confiança diante da ameaça, e Jesus lamenta a falta de conversão de cidades que viram tantos sinais." },
+    { key:"2026-07-15", label:"Qua 15", weekday:"Quarta-feira", week:"15ª Semana do Tempo Comum",
+      readings:"Is 10,5-7.13-16 · Sl 93 · Mt 11,25-27",
+      theme:"O orgulho é confrontado pela justiça de Deus, que se revela não aos sábios, mas aos pequeninos e simples." },
+    { key:"2026-07-16", label:"Qui 16", weekday:"Quinta-feira", week:"15ª Semana do Tempo Comum",
+      readings:"Is 26,7-9.12.16-19 · Sl 101 · Mt 11,28-30",
+      theme:"Um cântico de esperança na ressurreição encontra eco no convite de Jesus: 'Vinde a mim, os que estais cansados'." },
+    { key:"2026-07-17", label:"Sex 17", weekday:"Sexta-feira", week:"15ª Semana do Tempo Comum",
+      readings:"Is 38,1-8.21-22 · Is 38,10-20 · Mt 12,1-8",
+      theme:"A cura de Ezequias é motivo de ação de graças, enquanto Jesus ensina que a misericórdia vale mais que o rigor da lei." },
+    { key:"2026-07-18", label:"Sáb 18", weekday:"Sábado", week:"15ª Semana do Tempo Comum",
+      readings:"Mq 2,1-5 · Sl 9B · Mt 12,14-21",
+      theme:"Miqueias denuncia a injustiça dos poderosos, e Mateus reconhece em Jesus o Servo manso e humilde anunciado por Isaías." },
+    { key:"2026-07-19", label:"Dom 19", weekday:"Domingo", week:"16º Domingo do Tempo Comum",
+      readings:"Sb 12,13.16-19 · Sl 85 · Mt 13,24-43",
+      theme:"A sabedoria celebra a força serena da justiça de Deus, e a parábola do joio e do trigo ensina paciência com o crescimento do bem e do mal." },
   ];
 
-  const MOMENTS = ["Entrada","Ato Penitencial","Glória","Salmo","Aclamação","Ofertório","Santo","Comunhão","Ação de Graças","Final"];
-  const SEASONS_KEYS = ["verde","roxo","branco","vermelho"];
-  const SEASONS_LABELS = ["Tempo Comum","Advento / Quaresma","Natal / Páscoa / Solenidades","Pentecostes / Mártires"];
-  const THEMES = ["Espírito Santo","Palavra","Missão","Misericórdia","Cruz","Ressurreição","Maria","Vocação","Eucaristia","Unidade","Louvor","Santidade"];
-  const PLAYLISTS = [
-    {name:"Missa Jovem", n:18, author:"João", likes:34, date:"01/06/2025"},
-    {name:"Missa Dominical", n:32, author:"Ana", likes:56, date:"15/05/2025"},
-    {name:"Retiro", n:14, author:"Carlos", likes:22, date:"10/04/2025"},
-    {name:"Pentecostes", n:9, author:"Rita", likes:41, date:"20/05/2025"},
-    {name:"Corpus Christi", n:11, author:"Paulo", likes:29, date:"01/06/2025"},
-    {name:"Casamento", n:15, author:"Mariana", likes:48, date:"12/06/2025"},
-  ];
+  function pickSongs(moment, dayIndex, count) {
+    const arr = SONGS_BY_MOMENT[moment];
+    const off = (dayIndex * 7 + 13) % arr.length;
+    const res = [];
+    for (let i = 0; i < count; i++) res.push(arr[(off + i) % arr.length]);
+    return res;
+  }
+  const MOMENT_COUNTS = { "Entrada":2, "Aclamação":2, "Ofertório":2, "Comunhão":3, "Pós-Comunhão":3, "Final":1 };
+  function songsForDay(dayIndex) {
+    const out = {};
+    MOMENTS.forEach(m => out[m] = pickSongs(m, dayIndex, MOMENT_COUNTS[m]));
+    return out;
+  }
 
-  const PLAN_TEMPLATE = [
-    {moment:"Entrada", songId:8},
-    {moment:"Ato Penitencial", songId:11},
-    {moment:"Glória", songId:null},
-    {moment:"Salmo", songId:null},
-    {moment:"Aclamação", songId:1},
-    {moment:"Ofertório", songId:3},
-    {moment:"Santo", songId:null},
-    {moment:"Comunhão", songId:5},
-    {moment:"Ação de Graças", songId:12},
-    {moment:"Final", songId:9},
-  ];
+  const LITURGY_COMMENTS = {
+    "2026-07-13": [{who:"Pe. João",text:"Boa liturgia para refletir sobre o chamado radical.",up:12}],
+    "2026-07-14": [{who:"Maria",text:"Bom dia para falar sobre conversão do coração.",up:8}],
+    "2026-07-15": [{who:"Carlos",text:"A revelação aos pequeninos é um tema muito bonito.",up:5}],
+    "2026-07-16": [{who:"Ana",text:"O convite ao descanso em Jesus é muito atual.",up:15}],
+    "2026-07-17": [{who:"Pe. Marcos",text:"Misericórdia acima do sacrifício — centro do Evangelho.",up:10}],
+    "2026-07-18": [{who:"Rita",text:"A mansidão de Cristo como modelo para nós.",up:7}],
+    "2026-07-19": [{who:"Paulo",text:"O joio e o trigo sempre gera boa reflexão em grupo.",up:20}]
+  };
 
-  let favorites = [1,5,8,12];
+  // ============================================================
+  // ESTADO
+  // ============================================================
+  const PROFILES = [
+    { id:"joao", name:"João Paulo", role:"Músico litúrgico · desde 2024", contributions:342, songsAdded:18, comments:45, favorites:["com0","com4","ent0","pos3"] },
+    { id:"ana", name:"Ana Beatriz", role:"Coordenadora de música · desde 2022", contributions:521, songsAdded:37, comments:88, favorites:["ofe0","com10","pos10","acl0"] },
+  ];
+  let currentUser = null;
+  let favorites = ["com0","com4","ent0","pos3"];
+  let savedPlaylists = [];
   let lastListView = 'home';
+  let currentSongId = null;
+
+  function initials(name) { return name.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase(); }
 
   // ============================================================
-  // HELPERS
+  // NAVEGAÇÃO
   // ============================================================
   function goView(id) {
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     const el = document.getElementById('view-'+id);
     if (el) el.classList.add('active');
     document.querySelectorAll('.top-nav button').forEach(b => b.classList.toggle('active', b.dataset.view === id));
+    if (id === 'favorites') renderFavorites();
+    if (id === 'profile') renderProfile();
+    if (id === 'playlists') renderPlaylists();
+    if (id === 'planner') initPlanner();
     window.scrollTo({top:0, behavior:'smooth'});
+    closeMobileMenu();
   }
-  document.querySelectorAll('.top-nav button').forEach(b => b.addEventListener('click', () => { goView(b.dataset.view); }));
+  document.querySelectorAll('.top-nav button').forEach(b => b.addEventListener('click', () => goView(b.dataset.view)));
 
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(window._toastTimer);
+    window._toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+  }
+  function openOverlay(id) { document.getElementById(id).classList.add('show'); }
+  function closeOverlay(id) { document.getElementById(id).classList.remove('show'); }
+
+  // ===== MENU MOBILE =====
+  document.getElementById('menuToggle').addEventListener('click', function() {
+    document.getElementById('topNav').classList.toggle('open');
+    this.textContent = document.getElementById('topNav').classList.contains('open') ? '✕ Fechar' : '☰ Menu';
+  });
+  function closeMobileMenu() {
+    document.getElementById('topNav').classList.remove('open');
+    document.getElementById('menuToggle').textContent = '☰ Menu';
+  }
+
+  // ============================================================
+  // AUTENTICAÇÃO
+  // ============================================================
+  function renderTopActions() {
+    const el = document.getElementById('top-actions');
+    if (currentUser) {
+      el.innerHTML = `
+        <div class="user-chip"><div class="av">${initials(currentUser.name)}</div><span>${currentUser.name.split(' ')[0]}</span></div>
+        <button onclick="logout()">Sair</button>`;
+    } else {
+      el.innerHTML = `
+        <button onclick="openLogin()">Entrar</button>
+        <button class="primary" onclick="openSignup()">Criar conta</button>`;
+    }
+  }
+  function openLogin() {
+    document.getElementById('login-profile-list').innerHTML = PROFILES.map(p => `
+      <div class="profile-pick" onclick="loginAs('${p.id}')">
+        <div class="av">${initials(p.name)}</div>
+        <div class="info"><div class="n">${p.name}</div><div class="r">${p.role}</div></div>
+      </div>`).join('');
+    openOverlay('overlay-login');
+  }
+  function loginAs(id) {
+    currentUser = PROFILES.find(p => p.id === id);
+    closeOverlay('overlay-login');
+    renderTopActions();
+    renderProfile();
+    showToast(`Bem-vindo(a), ${currentUser.name.split(' ')[0]}!`);
+  }
+  function openSignup() { openOverlay('overlay-signup'); }
+  function createAccount() {
+    const name = document.getElementById('signup-name').value.trim() || "Novo Membro";
+    const role = document.getElementById('signup-role').value.trim() || "Membro da comunidade · agora";
+    const p = { id:"u"+Date.now(), name, role, contributions:0, songsAdded:0, comments:0, favorites:[] };
+    PROFILES.push(p);
+    currentUser = p;
+    closeOverlay('overlay-signup');
+    renderTopActions();
+    renderProfile();
+    showToast(`Conta criada. Bem-vindo(a), ${name.split(' ')[0]}!`);
+  }
+  function logout() { currentUser = null; renderTopActions(); renderProfile(); showToast("Você saiu."); }
+
+  // ============================================================
+  // FAVORITOS
+  // ============================================================
+  function isFav(id) { return favorites.includes(id); }
+  function toggleFav(id) {
+    if (isFav(id)) favorites = favorites.filter(f => f !== id);
+    else favorites.push(id);
+  }
+  function toggleFavCurrent() {
+    if (!currentSongId) return;
+    toggleFav(currentSongId);
+    showToast(isFav(currentSongId) ? "★ Favoritado!" : "Removido dos favoritos");
+    updateFavButton();
+  }
+  function updateFavButton() {
+    const btn = document.getElementById('song-fav-btn');
+    if (!btn) return;
+    btn.textContent = isFav(currentSongId) ? "★ Favoritado" : "★ Favoritar";
+  }
+
+  // ============================================================
+  // LISTAGEM
+  // ============================================================
   function starString(n) { return "★★★★★".slice(0,n) + "☆☆☆☆☆".slice(0,5-n); }
-  function ribbonEls(seasons) { return seasons.map(s => `<div class="ribbon ${s}"></div>`).join(''); }
 
-  function songRow(song, fromView, showFav = false) {
-    const isFav = favorites.includes(song.id);
-    return `<div class="song-row" onclick="openSong(${song.id}, '${fromView}')">
-      <div class="ribbons">${ribbonEls(song.seasons)}</div>
+  function songRow(song, fromView) {
+    const fav = isFav(song.id);
+    const colorVar = "var(--" + MOMENT_COLOR[song.moment] + ")";
+    return `<div class="song-row" onclick="openSong('${song.id}', '${fromView}')">
+      <div class="m-bar" style="background:${colorVar};"></div>
       <div class="song-main">
-        <div class="title">${song.title} ${isFav ? '<span class="fav">★</span>' : ''}</div>
-        <div class="meta">${song.composer} · ${song.moments.join(", ")}</div>
+        <div class="title">${song.title} ${fav ? '<span class="fav">★</span>' : ''}</div>
+        <div class="meta"><span class="m-tag" style="background:var(--${MOMENT_COLOR[song.moment]}-soft);color:${colorVar};">${song.moment}</span>${song.code ? ' · nº '+song.code : ''}</div>
       </div>
       <div class="song-stars">${starString(song.stars)}</div>
     </div>`;
   }
 
-  function toggleFavorite() { alert('★ Favoritado! (protótipo)'); }
+  // ============================================================
+  // LITURGIA DO DIA
+  // ============================================================
+  function renderLiturgySongs(daySongs) {
+    const container = document.getElementById('liturgy-songs-container');
+    let html = '';
+    for (const moment of MOMENTS) {
+      const songs = daySongs[moment] || [];
+      if (!songs.length) continue;
+      const colorVar = "var(--" + MOMENT_COLOR[moment] + ")";
+      html += `<div style="margin:16px 0 6px;"><span class="stat-badge" style="background:${colorVar};color:#fff;">${moment}</span></div><div class="song-list">`;
+      html += songs.map(s => songRow(s, 'liturgy')).join('');
+      html += `</div>`;
+    }
+    container.innerHTML = html;
+  }
+  function renderLiturgyComments(dayKey) {
+    const c = LITURGY_COMMENTS[dayKey] || [{who:"Comunidade",text:"Compartilhe sua experiência com esta liturgia.",up:0}];
+    document.getElementById('liturgy-comments').innerHTML = c.map(c =>
+      `<div class="comment"><div class="who">${c.who}</div><div class="text">${c.text}</div><div class="up">👍 ${c.up}</div></div>`
+    ).join('');
+  }
+  function renderLiturgyDay(dayKey) {
+    const idx = LITURGY_DATA.findIndex(d => d.key === dayKey);
+    if (idx === -1) return;
+    const data = LITURGY_DATA[idx];
+    document.getElementById('liturgy-readings').innerHTML = `
+      <span class="stat-badge">${data.week}</span>
+      <div class="theme">${data.weekday}</div>
+      <div style="color:var(--ink-soft);font-size:14px;margin-bottom:6px;">${data.readings}</div>
+      <div>${data.theme}</div>
+    `;
+    renderLiturgySongs(songsForDay(idx));
+    renderLiturgyComments(dayKey);
+    document.querySelectorAll('#liturgy-chips .chip').forEach(c => c.classList.toggle('active', c.dataset.day === dayKey));
+  }
+  function initLiturgyChips() {
+    const chipRow = document.getElementById('liturgy-chips');
+    chipRow.innerHTML = LITURGY_DATA.map(d =>
+      `<button class="chip" data-day="${d.key}" onclick="renderLiturgyDay('${d.key}')">${d.label}</button>`
+    ).join('');
+    renderLiturgyDay(LITURGY_DATA[0].key);
+  }
+  function updateToday() {
+    const today = LITURGY_DATA[0];
+    document.getElementById('today-title').textContent = today.week;
+    document.getElementById('today-gospel').textContent = today.readings;
+    document.getElementById('stat-songs').textContent = SONGS.length.toLocaleString('pt-BR');
+  }
 
   // ============================================================
-  // SEARCH (autocomplete)
+  // BUSCA
   // ============================================================
   function handleSearch(query) {
     const sug = document.getElementById('suggestions');
@@ -591,170 +1240,271 @@
     sug.classList.add('show');
     const results = SONGS.filter(s =>
       s.title.toLowerCase().includes(q) ||
-      s.composer.toLowerCase().includes(q) ||
-      (s.ministry && s.ministry.toLowerCase().includes(q)) ||
-      s.tags.some(t => t.toLowerCase().includes(q)) ||
-      s.scriptures.some(sc => sc.toLowerCase().includes(q)) ||
-      s.moments.some(m => m.toLowerCase().includes(q)) ||
-      s.seasons.some(se => se.includes(q))
+      s.moment.toLowerCase().includes(q) ||
+      (s.code && s.code.includes(q))
     ).slice(0, 8);
     if (!results.length) {
       sug.innerHTML = `<div class="item" style="color:var(--ink-soft);">Nenhuma música encontrada</div>`;
       return;
     }
     sug.innerHTML = results.map(s =>
-      `<div class="item" onclick="openSong(${s.id},'home'); document.getElementById('suggestions').classList.remove('show');">
+      `<div class="item" onclick="openSong('${s.id}','home'); document.getElementById('suggestions').classList.remove('show');">
         <span>${s.title}</span>
-        <span class="sub">${s.composer}</span>
+        <span class="sub">${s.moment}${s.code ? ' · nº '+s.code : ''}</span>
       </div>`
     ).join('');
   }
 
   // ============================================================
-  // MOMENTS
-  // ============================================================
-  function openMoments() {
-    const row = document.getElementById('moment-chips');
-    row.innerHTML = MOMENTS.map(m => `<button class="chip" data-m="${m}" onclick="renderMoment('${m}')">${m}</button>`).join('');
-    goView('moments');
-    renderMoment('Entrada');
-  }
-  function renderMoment(m) {
-    document.querySelectorAll('#moment-chips .chip').forEach(c => c.classList.toggle('active', c.dataset.m === m));
-    document.getElementById('moment-title').textContent = m;
-    const list = SONGS.filter(s => s.moments.includes(m));
-    document.getElementById('moment-count').textContent = list.length + (list.length === 1 ? ' música' : ' músicas');
-    document.getElementById('moment-songs').innerHTML = list.length ? list.map(s => songRow(s, 'moments')).join('') :
-      `<p style="color:var(--ink-soft);padding:16px 0;">Nenhuma música para este momento.</p>`;
-  }
-
-  // ============================================================
-  // SEASONS
-  // ============================================================
-  function openSeasons() {
-    const row = document.getElementById('season-chips');
-    row.innerHTML = SEASONS_KEYS.map((k,i) => `<button class="chip" data-s="${k}" onclick="renderSeason('${k}')">${SEASONS_LABELS[i]}</button>`).join('');
-    goView('seasons');
-    renderSeason('verde');
-  }
-  function renderSeason(key) {
-    document.querySelectorAll('#season-chips .chip').forEach(c => c.classList.toggle('active', c.dataset.s === key));
-    const label = SEASONS_LABELS[SEASONS_KEYS.indexOf(key)];
-    document.getElementById('season-title').textContent = label;
-    const list = SONGS.filter(s => s.seasons.includes(key));
-    document.getElementById('season-count').textContent = list.length + (list.length === 1 ? ' música' : ' músicas');
-    document.getElementById('season-songs').innerHTML = list.length ? list.map(s => songRow(s, 'seasons')).join('') :
-      `<p style="color:var(--ink-soft);padding:16px 0;">Nenhuma música classificada.</p>`;
-  }
-
-  // ============================================================
-  // LITURGY DAY
-  // ============================================================
-  function openLiturgyDay() {
-    goView('liturgy');
-    document.getElementById('liturgy-title').textContent = '16º Domingo do Tempo Comum';
-    const recs = [1,3,5,8,9];
-    document.getElementById('liturgy-songs').innerHTML = recs.map(id => {
-      const s = SONGS.find(x => x.id === id);
-      return s ? songRow(s, 'liturgy') : '';
-    }).join('');
-  }
-
-  // ============================================================
-  // SONG DETAIL
+  // FICHA DA MÚSICA
   // ============================================================
   function openSong(id, fromView) {
     lastListView = fromView || 'home';
-    const s = SONGS.find(x => x.id === id);
+    const s = findSong(id);
     if (!s) return;
+    currentSongId = id;
+    const colorVar = "var(--" + MOMENT_COLOR[s.moment] + ")";
     document.getElementById('song-title').textContent = s.title;
-    document.getElementById('song-composer').textContent = s.composer + ' · ' + s.moments.join(', ');
-    document.getElementById('song-ribbons').innerHTML = ribbonEls(s.seasons);
-    document.getElementById('song-tags').innerHTML = s.tags.map(t => `<span class="tag">${t}</span>`).join('');
+    document.getElementById('song-composer').textContent = s.moment + (s.code ? ' · nº ' + s.code : '');
+    document.getElementById('song-tags').innerHTML = `<span class="tag" style="background:var(--${MOMENT_COLOR[s.moment]}-soft);color:${colorVar};">${s.moment.toLowerCase()}</span>`;
+    document.getElementById('song-badges').innerHTML = `
+      <span class="stat-badge">★ ${s.favCount} favoritos</span>
+      <span class="stat-badge">Usada em ${1 + (s.favCount % 4)} playlists</span>`;
     const r = s.resources;
     document.getElementById('song-resources').innerHTML =
-      `${r.spotify ? '<span>Spotify</span>' : ''} ${r.youtube ? '<span>YouTube</span>' : ''} ${r.cifra ? '<span>Cifra Club</span>' : ''} <span>PDF partitura</span>`;
-    document.getElementById('song-scriptures').innerHTML = s.scriptures.map(sc => `<span class="stat-badge">📖 ${sc}</span>`).join('');
+      `${r.spotify ? '<span>Spotify</span>' : ''} ${r.youtube ? '<span>YouTube</span>' : ''} ${r.cifra ? '<span>Cifra Club</span>' : ''} <span>PDF</span>`;
     document.getElementById('song-comments').innerHTML = s.comments.length ?
       s.comments.map(c => `<div class="comment"><div class="who">${c.who}</div><div class="text">${c.text}</div><div class="up">👍 ${c.up}</div></div>`).join('') :
       `<p style="color:var(--ink-soft);">Seja o primeiro a comentar.</p>`;
+    updateFavButton();
     goView('song');
   }
   function goBackFromSong() { goView(lastListView); }
 
   // ============================================================
-  // PLANNER
+  // PLANEJADOR (MANUAL)
   // ============================================================
-  function setVeste(key) {
-    const map = {verde:'--verde', roxo:'--roxo', branco:'--branco', vermelho:'--vermelho'};
-    const soft = {verde:'#E4EDE3', roxo:'#E9E5F2', branco:'#F7EFD6', vermelho:'#F3E1E1'};
-    document.documentElement.style.setProperty('--veste', `var(${map[key]})`);
-    document.documentElement.style.setProperty('--veste-soft', soft[key]);
-  }
-  function renderPlan() {
-    const date = document.getElementById('planner-date').value;
-    const type = document.getElementById('planner-type').value;
-    const d = date ? new Date(date+'T12:00:00') : new Date();
-    const str = d.toLocaleDateString('pt-BR', {weekday:'long', day:'numeric', month:'long'});
-    document.getElementById('plan-reading').innerHTML = `<strong>${type}</strong> · ${str} · leituras: Gn 18,1-10a · Sl 15 · Cl 1,24-28 · Lc 10,38-42`;
-    document.getElementById('plan-list').innerHTML = PLAN_TEMPLATE.map(item => {
-      const song = item.songId ? SONGS.find(s => s.id === item.songId) : null;
-      return `<div class="moment-block">
-        <div class="mh">
-          <div><div class="name">${item.moment}</div><div class="song">${song ? song.title : '— nenhuma sugestão —'}</div></div>
-          <button onclick="alert('Trocar música — protótipo')">${song ? 'Trocar' : 'Escolher'}</button>
+  let plannerSelections = {};
+
+  function initPlanner() {
+    const container = document.getElementById('planner-moments');
+    let html = '';
+    MOMENTS.forEach(m => {
+      const songs = SONGS_BY_MOMENT[m] || [];
+      const current = plannerSelections[m] || '';
+      const colorVar = "var(--" + MOMENT_COLOR[m] + ")";
+      html += `<div class="moment-block">
+        <div class="mh" style="border-left:4px solid ${colorVar};">
+          <div class="name">${m}</div>
+          <select class="song-select" data-moment="${m}" onchange="updatePlannerSelection('${m}', this.value)">
+            <option value="">— selecione —</option>
+            ${songs.map(s => `<option value="${s.id}" ${s.id === current ? 'selected' : ''}>${s.title}${s.code ? ' (nº '+s.code+')' : ''}</option>`).join('')}
+          </select>
+          <button onclick="clearMoment('${m}')" title="Limpar">✕</button>
         </div>
       </div>`;
-    }).join('');
+    });
+    container.innerHTML = html;
+    document.getElementById('planner-date').value = '2026-07-19';
+  }
+
+  function updatePlannerSelection(moment, songId) {
+    if (songId) plannerSelections[moment] = songId;
+    else delete plannerSelections[moment];
+  }
+
+  function clearMoment(moment) {
+    delete plannerSelections[moment];
+    const sel = document.querySelector(`.song-select[data-moment="${moment}"]`);
+    if (sel) sel.value = '';
+  }
+
+  function clearPlanner() {
+    plannerSelections = {};
+    document.querySelectorAll('.song-select').forEach(sel => sel.value = '');
+    showToast('Planejador limpo');
+  }
+
+  function savePlaylist() {
+    const name = document.getElementById('playlist-name').value.trim() || 'Playlist sem nome';
+    const date = document.getElementById('playlist-date').value || '2026-07-19';
+    const type = document.getElementById('playlist-type').value;
+    const obs = document.getElementById('playlist-obs').value.trim();
+
+    const selected = [];
+    MOMENTS.forEach(m => {
+      const id = plannerSelections[m];
+      if (id) {
+        const song = findSong(id);
+        if (song) selected.push({ moment: m, song: song });
+      }
+    });
+
+    if (selected.length === 0) {
+      showToast('Selecione pelo menos uma música!');
+      return;
+    }
+
+    const playlist = {
+      id: 'pl_' + Date.now(),
+      name: name,
+      date: date,
+      type: type,
+      obs: obs,
+      songs: selected,
+      n: selected.length,
+      author: currentUser ? currentUser.name : 'Visitante',
+      likes: 0,
+      createdAt: new Date().toLocaleDateString('pt-BR')
+    };
+
+    savedPlaylists.push(playlist);
+    renderPlaylists();
+    document.getElementById('plan-save-feedback').style.display = 'block';
+    document.getElementById('plan-save-feedback').innerHTML = `✅ Playlist "${name}" salva com ${selected.length} músicas!`;
+    showToast(`Playlist "${name}" salva!`);
   }
 
   // ============================================================
   // PLAYLISTS
   // ============================================================
-  document.getElementById('playlist-grid').innerHTML = PLAYLISTS.map(p =>
-    `<div class="playlist-card"><h3>${p.name}</h3><div class="n">${p.n} músicas · ❤️ ${p.likes} · ${p.author} · ${p.date}</div></div>`
-  ).join('');
+  const BASE_PLAYLISTS = [
+    { name:"Missa Jovem", n:18, author:"João", likes:34 },
+    { name:"Missa Dominical", n:32, author:"Ana", likes:56 },
+    { name:"Retiro", n:14, author:"Carlos", likes:22 },
+  ];
+
+  function renderPlaylists() {
+    const all = [...BASE_PLAYLISTS, ...savedPlaylists.map(p => ({
+      name: p.name + (p.type ? ' ('+p.type+')' : ''),
+      n: p.n,
+      author: p.author,
+      likes: p.likes || 0,
+      date: p.date || p.createdAt || ''
+    }))];
+    document.getElementById('playlist-grid').innerHTML = all.map(p =>
+      `<div class="playlist-card"><h3>${p.name}</h3><div class="n">${p.n} músicas · ❤️ ${p.likes} · ${p.author}${p.date ? ' · '+p.date : ''}</div></div>`
+    ).join('');
+    document.getElementById('playlist-count').textContent = all.length + " playlists";
+    document.getElementById('stat-playlists').textContent = all.length;
+  }
 
   // ============================================================
-  // PROFILE & FAVORITES
+  // FAVORITOS / PERFIL
   // ============================================================
   function renderFavorites() {
-    const list = SONGS.filter(s => favorites.includes(s.id));
+    const list = favorites.map(findSong).filter(Boolean);
     document.getElementById('favorites-list').innerHTML = list.length ? list.map(s => songRow(s, 'favorites')).join('') :
-      `<p style="color:var(--ink-soft);padding:16px 0;">Nenhuma favorita ainda.</p>`;
-    document.getElementById('profile-favs').innerHTML = list.slice(0,6).map(s =>
-      `<div class="fav-item" onclick="openSong(${s.id},'profile')">${s.title} <span style="color:var(--ink-soft);font-size:13px;margin-left:auto;">${s.composer}</span></div>`
-    ).join('');
+      `<div class="empty-state"><div class="glyph">☆</div><p>Nenhuma favorita ainda. Toque na estrela na ficha de uma música.</p></div>`;
   }
-  renderFavorites();
+
+  function renderProfile() {
+    const out = document.getElementById('profile-logged-out');
+    const inn = document.getElementById('profile-logged-in');
+    if (!currentUser) { out.style.display = 'block'; inn.style.display = 'none'; return; }
+    out.style.display = 'none'; inn.style.display = 'block';
+    document.getElementById('profile-avatar').textContent = initials(currentUser.name);
+    document.getElementById('profile-name').textContent = currentUser.name;
+    document.getElementById('profile-role').textContent = currentUser.role;
+    document.getElementById('profile-mini-badges').innerHTML = `
+      <span class="stat-badge">🎵 ${currentUser.songsAdded} músicas</span>
+      <span class="stat-badge">💬 ${currentUser.comments} comentários</span>
+      <span class="stat-badge">⭐ ${currentUser.favorites.length} favoritas</span>`;
+    document.getElementById('profile-stats').innerHTML = `
+      <div class="ps"><span class="num">${currentUser.contributions}</span><span class="lab">contribuições</span></div>
+      <div class="ps"><span class="num">${currentUser.songsAdded}</span><span class="lab">músicas</span></div>
+      <div class="ps"><span class="num">${currentUser.comments}</span><span class="lab">comentários</span></div>`;
+    const favSongs = currentUser.favorites.map(findSong).filter(Boolean);
+    document.getElementById('profile-favs').innerHTML = favSongs.length ? favSongs.map(s =>
+      `<div class="fav-item" onclick="openSong('${s.id}','profile')">${s.title} <span style="color:var(--ink-soft);font-size:13px;margin-left:auto;">${s.moment}</span></div>`
+    ).join('') : `<p style="color:var(--ink-soft);">Nenhuma favorita salva neste perfil.</p>`;
+  }
 
   // ============================================================
-  // CADASTRO
+  // CADASTRO DE MÚSICA
   // ============================================================
   function submitSong(e) {
     e.preventDefault();
-    document.getElementById('addsong-success').innerHTML = '✅ Música enviada para revisão! Aparece no seu perfil.';
-    document.getElementById('addsong-success').classList.add('show');
-    setTimeout(() => document.getElementById('addsong-success').classList.remove('show'), 4000);
+    const title = document.getElementById('f-title').value.trim();
+    if (!title) { showToast('Preencha o nome da música'); return; }
+    const composer = document.getElementById('f-composer').value.trim() || 'Desconhecido';
+    const momentChecks = document.querySelectorAll('#f-moments input:checked');
+    const seasonChecks = document.querySelectorAll('#f-seasons input:checked');
+
+    const newSong = {
+      id: 'usr_' + Date.now(),
+      title: title,
+      composer: composer,
+      moment: momentChecks.length ? momentChecks[0].value : 'Entrada',
+      seasons: Array.from(seasonChecks).map(el => el.value),
+      tags: ['nova'],
+      stars: 4,
+      favCount: 0,
+      resources: {
+        youtube: !!document.getElementById('f-youtube').value,
+        spotify: !!document.getElementById('f-spotify').value,
+        cifra: !!document.getElementById('f-cifra').value
+      },
+      comments: [],
+      lyrics: document.getElementById('f-lyrics').value,
+      notes: document.getElementById('f-notes').value,
+      key: document.getElementById('f-key').value,
+      bpm: document.getElementById('f-bpm').value,
+      rhythm: document.getElementById('f-rhythm').value,
+      difficulty: document.getElementById('f-difficulty').value
+    };
+
+    // Adiciona ao catálogo (apenas para o protótipo)
+    SONGS.push(newSong);
+    if (!SONGS_BY_MOMENT[newSong.moment]) SONGS_BY_MOMENT[newSong.moment] = [];
+    SONGS_BY_MOMENT[newSong.moment].push(newSong);
+
+    document.getElementById('stat-songs').textContent = SONGS.length;
+    showToast(`✅ "${title}" enviada para revisão!`);
     e.target.reset();
+
+    // feedback visual
+    const btn = e.target.querySelector('button[type="submit"]');
+    const orig = btn.textContent;
+    btn.textContent = '✅ Enviado!';
+    setTimeout(() => btn.textContent = orig, 2000);
   }
 
   // ============================================================
-  // INIT FORM CHECKS
+  // INIT FORM CHECKS (Momentos e Tempos no cadastro)
   // ============================================================
   (function initFormChecks() {
     const momentDiv = document.getElementById('f-moments');
-    MOMENTS.forEach(m => { const d = document.createElement('label'); d.className='check-pill'; d.innerHTML=`<input type="checkbox" value="${m}"> ${m}`; momentDiv.appendChild(d); });
+    MOMENTS.forEach(m => {
+      const d = document.createElement('label');
+      d.className = 'check-pill';
+      d.innerHTML = `<input type="checkbox" value="${m}"> ${m}`;
+      momentDiv.appendChild(d);
+    });
     const seasonDiv = document.getElementById('f-seasons');
-    SEASONS_KEYS.forEach((k,i) => { const d = document.createElement('label'); d.className='check-pill'; d.innerHTML=`<input type="checkbox" value="${k}"> ${SEASONS_LABELS[i]}`; seasonDiv.appendChild(d); });
-    const themeDiv = document.getElementById('f-themes');
-    THEMES.forEach(t => { const d = document.createElement('label'); d.className='check-pill'; d.innerHTML=`<input type="checkbox" value="${t}"> ${t}`; themeDiv.appendChild(d); });
+    const seasons = [
+      { key:"verde", label:"Tempo Comum" },
+      { key:"roxo", label:"Advento / Quaresma" },
+      { key:"branco", label:"Natal / Páscoa / Solenidades" },
+      { key:"vermelho", label:"Pentecostes / Mártires" }
+    ];
+    seasons.forEach(s => {
+      const d = document.createElement('label');
+      d.className = 'check-pill';
+      d.innerHTML = `<input type="checkbox" value="${s.key}"> ${s.label}`;
+      seasonDiv.appendChild(d);
+    });
   })();
 
   // ============================================================
   // BOOT
   // ============================================================
-  renderPlan();
+  renderTopActions();
+  updateToday();
+  initLiturgyChips();
+  renderPlaylists();
+  renderFavorites();
+  initPlanner();
 </script>
 </body>
 </html>
