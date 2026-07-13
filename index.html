@@ -48,222 +48,230 @@
     /* ===== BANDA SUPERIOR ===== */
     .season-band { height: 6px; width: 100%; background: linear-gradient(90deg, var(--gold) 0 16.6%, var(--azul) 16.6% 33.3%, var(--verde) 33.3% 50%, var(--roxo) 50% 66.6%, var(--vermelho) 66.6% 83.3%, var(--terra) 83.3% 100%); }
 
-    /* ===== HEADER ===== */
-    header.top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 32px;
-      border-bottom: 1px solid var(--line);
-      background: var(--paper);
-      flex-wrap: wrap;
-      gap: 12px;
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    }
+   /* ===== HEADER ===== */
+header.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  flex-wrap: wrap;
+}
 
-    .logo { display: flex; align-items: baseline; gap: 10px; flex-shrink: 0; }
-    .logo .mark { font-family: 'Fraunces', serif; font-weight: 700; font-size: 26px; color: var(--brand); }
-    .logo .tag { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: .08em; }
+.logo { 
+  display: flex; 
+  align-items: baseline; 
+  gap: 8px; 
+  flex-shrink: 0;
+}
+.logo .mark { 
+  font-family: 'Fraunces', serif; 
+  font-weight: 700; 
+  font-size: 22px; 
+  color: var(--brand); 
+}
+.logo .tag { 
+  font-family: 'Space Mono', monospace; 
+  font-size: 10px; 
+  color: var(--ink-soft); 
+  text-transform: uppercase; 
+  letter-spacing: .08em; 
+}
 
-    /* ===== MENU PRINCIPAL ===== */
-    nav.top-nav {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      align-items: center;
-      flex: 1;
-      justify-content: center;
-    }
-    nav.top-nav button {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-family: 'Space Mono', monospace;
-      font-size: 12px;
-      letter-spacing: .05em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-      padding: 8px 14px;
-      border-radius: 30px;
-      transition: background .2s, color .2s, border-color .2s;
-      border: 1px solid transparent;
-      font-weight: 500;
-      min-height: 40px;
-    }
-    nav.top-nav button:hover {
-      background: var(--brand-soft);
-      color: var(--ink);
-      border-color: var(--brand-soft);
-    }
-    nav.top-nav button:focus-visible,
-    .top-actions button:focus-visible,
-    .cta:focus-visible,
-    .chip:focus-visible,
-    .moments-sidebar button:focus-visible,
-    .entry-card:focus-visible,
-    .song-row:focus-visible,
-    .playlist-card:focus-visible,
-    .fav-item:focus-visible,
-    .profile-pick:focus-visible,
-    .menu-toggle:focus-visible,
-    input:focus-visible,
-    select:focus-visible,
-    textarea:focus-visible,
-    a:focus-visible {
-      outline: 3px solid var(--azul);
-      outline-offset: 2px;
-    }
-    nav.top-nav button.active {
-      background: var(--brand);
-      color: #fff;
-      border-color: var(--brand);
-      box-shadow: 0 2px 8px rgba(184,144,46,0.25);
-    }
-    nav.top-nav button.active:hover {
-      background: #a67d28;
-      border-color: #a67d28;
-    }
+/* ===== MENU HAMBURGUER (mobile) ===== */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--line);
+  padding: 6px 14px;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  border-radius: 30px;
+  color: var(--ink-soft);
+  flex-shrink: 0;
+  order: 2;
+}
+.menu-toggle:hover { 
+  background: var(--brand-soft); 
+  border-color: var(--brand); 
+}
 
-    /* ===== AÇÕES DO TOPO ===== */
-    .top-actions {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      flex-shrink: 0;
-    }
-    .top-actions button {
-      background: none;
-      border: 1px solid var(--line);
-      padding: 8px 16px;
-      font-family: 'Space Mono', monospace;
-      font-size: 11px;
-      text-transform: uppercase;
-      border-radius: 30px;
-      transition: background .2s, border-color .2s;
-      min-height: 40px;
-    }
-    .top-actions button:hover { background: var(--brand-soft); border-color: var(--brand); }
-    .top-actions button.primary {
-      background: var(--brand);
-      color: #fff;
-      border-color: var(--brand);
-    }
-    .top-actions button.primary:hover { background: #a67d28; border-color: #a67d28; }
+/* ===== MENU PRINCIPAL ===== */
+nav.top-nav {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+  order: 3;
+}
+nav.top-nav button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding: 6px 12px;
+  border-radius: 30px;
+  transition: all .2s;
+  border: 1px solid transparent;
+  font-weight: 500;
+  white-space: nowrap;
+}
+nav.top-nav button:hover {
+  background: var(--brand-soft);
+  color: var(--ink);
+  border-color: var(--brand-soft);
+}
+nav.top-nav button.active {
+  background: var(--brand);
+  color: #fff;
+  border-color: var(--brand);
+  box-shadow: 0 2px 8px rgba(184,144,46,0.25);
+}
+nav.top-nav button.active:hover {
+  background: #a67d28;
+  border-color: #a67d28;
+}
 
-    .user-chip {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-family: 'Space Mono', monospace;
-      font-size: 12px;
-      padding: 4px 12px 4px 4px;
-      border-radius: 30px;
-      background: var(--brand-soft);
-      border: 1px solid var(--line);
-    }
-    .user-chip .av {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: var(--brand);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Fraunces', serif;
-      font-weight: 600;
-      font-size: 13px;
-    }
+/* ===== AÇÕES DO TOPO ===== */
+.top-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-shrink: 0;
+  order: 4;
+}
+.top-actions button {
+  background: none;
+  border: 1px solid var(--line);
+  padding: 6px 14px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  border-radius: 30px;
+  transition: all .2s;
+  white-space: nowrap;
+}
+.top-actions button:hover { 
+  background: var(--brand-soft); 
+  border-color: var(--brand); 
+}
+.top-actions button.primary {
+  background: var(--brand);
+  color: #fff;
+  border-color: var(--brand);
+}
+.top-actions button.primary:hover { 
+  background: #a67d28; 
+  border-color: #a67d28; 
+}
 
-    /* ===== MENU HAMBURGUER (mobile) ===== */
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: 1px solid var(--line);
-      padding: 6px 14px;
-      font-family: 'Space Mono', monospace;
-      font-size: 13px;
-      border-radius: 30px;
-      color: var(--ink-soft);
-      flex-shrink: 0;
-      min-height: 40px;
-    }
-    .menu-toggle:hover { background: var(--brand-soft); border-color: var(--brand); }
+.user-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  padding: 3px 10px 3px 3px;
+  border-radius: 30px;
+  background: var(--brand-soft);
+  border: 1px solid var(--line);
+}
+.user-chip .av {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--brand);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 11px;
+}
 
-    /* ===== SKIP LINK ===== */
-    .skip-link {
-      position: absolute;
-      left: -9999px;
-      top: 0;
-      background: var(--ink);
-      color: #fff;
-      padding: 12px 20px;
-      z-index: 999;
-      border-radius: 0 0 8px 0;
-      font-family: 'Space Mono', monospace;
-      font-size: 13px;
-      text-decoration: none;
-    }
-    .skip-link:focus {
-      left: 0;
-    }
+/* ===== RESPONSIVO MENU ===== */
+@media (max-width: 860px) {
+  header.top {
+    padding: 10px 16px;
+    gap: 8px;
+  }
+  
+  .logo .tag { display: none; }
+  .logo .mark { font-size: 20px; }
+  
+  .menu-toggle {
+    display: block;
+    order: 2;
+    font-size: 11px;
+    padding: 5px 12px;
+  }
+  
+  .top-actions {
+    order: 3;
+    gap: 6px;
+  }
+  .top-actions button {
+    font-size: 9px;
+    padding: 4px 10px;
+  }
+  .top-actions button.primary { padding: 4px 12px; }
+  
+  nav.top-nav {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    gap: 2px;
+    padding: 10px 0 4px;
+    border-top: 1px solid var(--line);
+    background: var(--paper);
+    order: 5;
+    flex: 0 0 100%;
+  }
+  nav.top-nav.open {
+    display: flex;
+  }
+  nav.top-nav button {
+    width: 100%;
+    text-align: left;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: none;
+    font-size: 12px;
+    white-space: normal;
+  }
+  nav.top-nav button:hover {
+    background: var(--brand-soft);
+    border-color: transparent;
+  }
+  nav.top-nav button.active {
+    background: var(--brand);
+    color: #fff;
+    border-color: transparent;
+  }
+}
 
-    @media (max-width: 860px) {
-      .menu-toggle { display: block; }
-      nav.top-nav {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        gap: 4px;
-        padding: 12px 0 6px;
-        border-top: 1px solid var(--line);
-        background: var(--paper);
-        order: 10;
-      }
-      nav.top-nav.open {
-        display: flex;
-      }
-      nav.top-nav button {
-        width: 100%;
-        text-align: left;
-        padding: 12px 16px;
-        border-radius: 8px;
-        border: none;
-        font-size: 13px;
-      }
-      nav.top-nav button:hover {
-        background: var(--brand-soft);
-        border-color: transparent;
-      }
-      nav.top-nav button.active {
-        background: var(--brand);
-        color: #fff;
-        border-color: transparent;
-      }
-      header.top {
-        padding: 12px 18px;
-        gap: 10px;
-      }
-      .logo .tag { display: none; }
-      .top-actions button { font-size: 10px; padding: 8px 12px; }
-    }
-
-    /* ===== TABLET (2 colunas) ===== */
-    @media (min-width: 761px) and (max-width: 1024px) {
-      .entry-grid, .playlist-grid, .fav-grid { grid-template-columns: repeat(2, 1fr) !important; }
-    }
-
-    @media (max-width: 480px) {
-      header.top { padding: 10px 14px; }
-      .logo .mark { font-size: 22px; }
-      .top-actions button { font-size: 9px; padding: 8px 10px; }
-      .top-actions button.primary { padding: 8px 12px; }
-      .user-chip { font-size: 10px; padding: 2px 8px 2px 2px; }
-      .user-chip .av { width: 26px; height: 26px; font-size: 11px; }
-    }
+@media (max-width: 480px) {
+  header.top { padding: 8px 12px; }
+  .logo .mark { font-size: 18px; }
+  .menu-toggle { font-size: 10px; padding: 4px 10px; }
+  .top-actions button { font-size: 8px; padding: 3px 8px; }
+  .top-actions button.primary { padding: 3px 10px; }
+  .user-chip { font-size: 10px; padding: 2px 8px 2px 2px; }
+  .user-chip .av { width: 22px; height: 22px; font-size: 10px; }
+}
 
     /* ===== RESTO DO LAYOUT ===== */
     main { max-width: 1140px; margin: 0 auto; padding: 30px 32px 80px; }
@@ -603,16 +611,17 @@
 </head>
 <body>
 
-<a href="#main-content" class="skip-link">Pular para o conteúdo</a>
 
 <div class="season-band"></div>
 <header class="top">
-  <div class="logo"><span class="mark">Cântico</span><span class=""></span></div>
+  <div class="logo">
+    <span class="mark">Cântico</span>
+    <span class=""></span></div>
 
-  <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="topNav">☰ Menu</button>
+  <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">☰</button>
 
-  <nav class="top-nav" id="topNav" aria-label="Navegação principal">
-    <button data-view="home" class="active" aria-current="page">Início</button>
+  <nav class="top-nav" id="topNav">
+    <button data-view="home" class="active">Início</button>
     <button data-view="moments">Por Momento</button>
     <button data-view="liturgy">Liturgia</button>
     <button data-view="planner">Planejador</button>
